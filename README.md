@@ -36,9 +36,11 @@ For both human and mouse macrophages, we identified NRP1high and NRP1low groups,
 Paired-end (PE50), reverse stranded sequencing for Nrp1 WT versus Nrp1 KO peritoneal macrophages in reconstituted Ldlr−/− male mice was performed using Illumina NovaSeq6000 platform. Raw fastq data have been deposited in ArrayExpress with accession number E-MTAB-12761 (http://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-12761). DEGs analysis is the same workflow as mentioned for iWD vs cWD. Sample summary and mapping statistics table is in Supplementary Table 13b. There were 113 significant DEGs identified (Supplementary Table 12). Gene Ontology was performed using clusterProfiler (R package, version 4.4.4) with the 113 DEGs, and the list of pathways is given in Supplementary Table 11.<br>
 
 
-#  Analysis (QC--->DEGs---->GeneOntology + Transcriptome Factor analysis)
+#  Analysis <br>
+### (QC->DEGs->GeneOntology + Transcriptome Factor analysis)
 
-## Step 1: QC and Alignment pipeline (nextflow version 21.05.0, nf-core/rnaseq version 3.2)
+## Step 1: QC and Alignment pipeline
+(nextflow version 21.05.0, nf-core/rnaseq version 3.2)
 
 #### Sample sheet input for nextflow pipeline
 Macrophage_FirstBatch_nextflow_SampleTable.csv[[csv](Macrophage_FirstBatch_nextflow_SampleTable.csv)] <br>
@@ -61,10 +63,11 @@ nextflow run nf-core/rnaseq -bg -profile singularity -r 3.2 \
                             --email xz289@cam.ac.uk -with-report NRP1_Results/report.html &> NRP1_Results/nextflow_command.log &
 ```
 
-## Step 2: Differential Analysis using R (v4.2.1) with DESeq2 (v1.36.0) & Gene Ontology Analysis
+## Step 2: Differential Analysis
+Using R (v4.2.1) with DESeq2 (v1.36.0) & Gene Ontology Analysis
 
 The analysis code is <br>
-DESeq_GO_Analysis.R[[Rscript](./Scripts/DESeq_GO_Analysis.R)]
+#### DESeq_GO_Analysis.R[[Rscript](./Scripts/DESeq_GO_Analysis.R)]
 
                  Design formula ~ condition
 
