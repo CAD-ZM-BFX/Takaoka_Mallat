@@ -1,0 +1,7 @@
+"sample","fastq_1","fastq_2","strandedness"
+"NHFD_REP1","SLX-18681.i701_i502.HGVWJBBXY.s_5.r_1.fq.gz","","unstranded"
+"NHFD_REP2","SLX-18681.i702_i502.HGVWJBBXY.s_5.r_1.fq.gz","","unstranded"
+"NHFD_REP3","SLX-18681.i703_i503.HGVWJBBXY.s_5.r_1.fq.gz","","unstranded"
+"AHFD_REP1","SLX-18681.i704_i503.HGVWJBBXY.s_5.r_1.fq.gz","","unstranded"
+"AHFD_REP2","SLX-18681.i705_i504.HGVWJBBXY.s_5.r_1.fq.gz","","unstranded"
+"AHFD_REP3","SLX-18681.i706_i504.HGVWJBBXY.s_5.r_1.fq.gz","","unstranded"
