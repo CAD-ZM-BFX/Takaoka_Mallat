@@ -32,8 +32,8 @@ Journal xxx,  [![DOI](https://doi.org/***)](https://doi.org/***) <br>
 <sup>19</sup> Department of Immunology, Institute of Advanced Medicine, Wakayama Medical University, Japan.<br>
 <sup>20</sup> Department of Clinical Physiology and Nuclear Medicine, Turku University Hospital, Turku, Finland.<br>
 
-* Contributed equally
-\*Corresponding authors:** Ziad Mallat (zm245@medschl.cam.ac.uk)<br>
+\* Contributed equally <br>
+Corresponding authors:** Ziad Mallat (zm245@medschl.cam.ac.uk)<br>
 
 Code Release for this github: [![DOI](https://zenodo.org/badge/***)](https://zenodo.org/badge/latestdoi/***)
 
