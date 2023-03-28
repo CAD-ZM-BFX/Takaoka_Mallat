@@ -1,11 +1,39 @@
 # Takaoka_Mallat
 # Intermittent childhood hyperlipidaemia alters resident arterial macrophages and accelerates atherosclerosis
-Minoru Takaoka <sup>1\*\+</sup>, Ziad Mallat <sup>1,6\* </sup> <br>
-
+Minoru Takaoka<sup>1</sup>, Xiaohui Zhao<sup>1\*\+</sup>, Hwee Ying Lim<sup>2,3\*\+</sup>, Costan G. Magnussen<sup>4,5,6\*\+</sup>*,
+Nadine Suffee<sup>7</sup>, Patricia R. Schrank<sup>8</sup>, Owen Ang<sup>2,3</sup>, Dimitrios Tsiantoulas<sup>1,9</sup>, Felix
+Sommer<sup>10</sup>, Sarajo K. Mohanta<sup>11</sup>, James Harrison<sup>1</sup>, Yaxing Meng<sup>6</sup>, Ludivine Laurans<sup>7</sup>,
+Feitong Wu<sup>6</sup>, Yuning Lu<sup>1</sup>, Leanne Masters<sup>1</sup>, Stephen A Newland<sup>1</sup>, Laura Denti<sup>12</sup>,
+Mingyang Hong<sup>11</sup>, Mouna Chajadine<sup>7</sup>, Markus Juonala<sup>13,14</sup>, Juhani S.
+Koskinen<sup>4,5,14,15</sup>, Mika Kähönen<sup>16,17,18</sup>, Tsuneyasu Kaisho<sup>19</sup>, Andreas J.R.
+Habenicht<sup>11</sup>, Alain Tedgui<sup>7</sup>, Hafid Ait-Oufella<sup>7</sup>, Tian X Zhao<sup>1</sup>, Meritxell Nus<sup>1</sup>,
+Christiana Ruhrberg<sup>12</sup>, Soraya Taleb<sup>7</sup>, Jesse W. Williams<sup>8</sup>, Olli T. Raitakari<sup>4,5,20\*\+</sup>,
+Véronique Angeli<sup>2,3\*\+</sup>, Ziad Mallat<sup>1,7</sup>
 Journal xxx,  [![DOI](https://doi.org/***)](https://doi.org/***) <br>
-<sup>1</sup> Department of medicine, University of Cambridge, Cambridge, UK <br>
+ 
+<sup>1</sup> Department of Medicine, Cardiovascular Division, University of Cambridge, Heart and Lung Research Institute, CB2 0BB, Cambridge, UK, <br>
+<sup>2</sup> Immunology Translational Research Programme, Yong Loo Lin School of Medicine, Dept. of Department of Microbiology and Immunology, National University of Singapore, Singapore. <br>
+<sup>3</sup> Immunology Programme, Life Sciences Institute, National University of Singapore, Singapore.<br>
+<sup>4</sup> Research Centre of Applied and Preventive Cardiovascular Medicine; University of Turku, Turku, Finland.<br>
+<sup>5</sup> Centre for Population Health Research, University of Turku and Turku University Hospital, Turku, Finland.<br>
+<sup>6</sup> Baker Heart and Diabetes Institute, Melbourne, Victoria, Australia.<br>
+<sup>7</sup> Université de Paris, Institut National de la Santé et de la Recherche Médicale, U970, PARCC, Paris, France.<br>
+<sup>8</sup> Department of Integrative Biology & Physiology, Center for Immunology, University of Minnesota, Minneapolis, USA.<br>
+<sup>9</sup> Department of Laboratory Medicine, Medical University of Vienna, Vienna, Austria<br>
+<sup>10</sup> Institute of Clinical Molecular Biology, University of Kiel and University Hospital Schleswig Holstein (UKSH), Germany<br>
+<sup>11</sup> Institute for Cardiovascular Prevention, Ludwig-Maximilians-33 Universität München(LMU), Munich, Germany.<br>
+<sup>12</sup> Institute of Ophthalmology, University College London, UK.<br>
+<sup>13</sup> Department of Medicine, University of Turku, Turku, Finland.<br>
+<sup>14</sup> Division of Medicine, Turku University Hospital, Turku, Finland.<br>
+<sup>15</sup> Department of Medicine, Satakunta Central Hospital, Pori, Finland.<br>
+<sup>16</sup> Department of Clinical Physiology, University of Tampere, Tampere, Finland.<br>
+<sup>17</sup> Faculty of Medicine and Health Technology, University of Tampere, Tampere,Finland.<br>
+<sup>18</sup> Finnish Cardiovascular Research Center Tampere, University of Tampere, Tampere, Finland.<br>
+<sup>19</sup> Department of Immunology, Institute of Advanced Medicine, Wakayama Medical University, Japan.<br>
+<sup>20</sup> Department of Clinical Physiology and Nuclear Medicine, Turku University Hospital, Turku, Finland.<br>
 
-\*Corresponding authors:** Ziad Mallat (zm245@medschl.cam.ac.uk) and xxx (xx@xxx) <br>
+* Contributed equally
+\*Corresponding authors:** Ziad Mallat (zm245@medschl.cam.ac.uk)<br>
 
 Code Release for this github: [![DOI](https://zenodo.org/badge/***)](https://zenodo.org/badge/latestdoi/***)
 
