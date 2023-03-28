@@ -167,4 +167,4 @@ other attached packages:
 
 ## Contact
 
-Contact Xiaohui Zhao (xz289 -at- cam.ac.uk) and Russell S.Hamilton (rsh46 -at- cam.ac.uk)
+Contact Xiaohui Zhao (xz289 -at- cam.ac.uk) 
