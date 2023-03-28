@@ -1,14 +1,14 @@
 # Takaoka_Mallat
 # Intermittent childhood hyperlipidaemia alters resident arterial macrophages and accelerates atherosclerosis
-Minoru Takaoka<sup>1</sup>, Xiaohui Zhao<sup>1\*\+</sup>, Hwee Ying Lim<sup>2,3\*\+</sup>, Costan G. Magnussen<sup>4,5,6\*\+</sup>*,
+Minoru Takaoka<sup>1</sup>, Xiaohui Zhao<sup>1\*\</sup>, Hwee Ying Lim<sup>2,3\*\</sup>, Costan G. Magnussen<sup>4,5,6\*\</sup>*,
 Nadine Suffee<sup>7</sup>, Patricia R. Schrank<sup>8</sup>, Owen Ang<sup>2,3</sup>, Dimitrios Tsiantoulas<sup>1,9</sup>, Felix
 Sommer<sup>10</sup>, Sarajo K. Mohanta<sup>11</sup>, James Harrison<sup>1</sup>, Yaxing Meng<sup>6</sup>, Ludivine Laurans<sup>7</sup>,
 Feitong Wu<sup>6</sup>, Yuning Lu<sup>1</sup>, Leanne Masters<sup>1</sup>, Stephen A Newland<sup>1</sup>, Laura Denti<sup>12</sup>,
 Mingyang Hong<sup>11</sup>, Mouna Chajadine<sup>7</sup>, Markus Juonala<sup>13,14</sup>, Juhani S.
 Koskinen<sup>4,5,14,15</sup>, Mika Kähönen<sup>16,17,18</sup>, Tsuneyasu Kaisho<sup>19</sup>, Andreas J.R.
 Habenicht<sup>11</sup>, Alain Tedgui<sup>7</sup>, Hafid Ait-Oufella<sup>7</sup>, Tian X Zhao<sup>1</sup>, Meritxell Nus<sup>1</sup>,
-Christiana Ruhrberg<sup>12</sup>, Soraya Taleb<sup>7</sup>, Jesse W. Williams<sup>8</sup>, Olli T. Raitakari<sup>4,5,20\*\+</sup>,
-Véronique Angeli<sup>2,3\*\+</sup>, Ziad Mallat<sup>1,7</sup>
+Christiana Ruhrberg<sup>12</sup>, Soraya Taleb<sup>7</sup>, Jesse W. Williams<sup>8</sup>, Olli T. Raitakari<sup>4,5,20\*\</sup>,
+Véronique Angeli<sup>2,3\*\</sup>, Ziad Mallat<sup>1,7</sup>
 Journal xxx,  [![DOI](https://doi.org/***)](https://doi.org/***) <br>
  
 <sup>1</sup> Department of Medicine, Cardiovascular Division, University of Cambridge, Heart and Lung Research Institute, CB2 0BB, Cambridge, UK, <br>
