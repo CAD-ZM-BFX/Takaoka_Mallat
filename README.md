@@ -98,7 +98,7 @@ Using R (v4.2.1) with DESeq2 (v1.36.0) & Gene Ontology Analysis
 
 The analysis code is <br>
 #### Macrophage_DESeq_GO_Analysis.R[[Rscript](./Scripts/Macrophage_DESeq_GO_Analysis.R)]
-#### Nrp1_DESeq_GO_Analysis.R[Rscript](./Scripts/Nrp1_DESeq_GO_Analysis.R)]
+#### Nrp1_DESeq_GO_Analysis.R[[Rscript](./Scripts/Nrp1_DESeq_GO_Analysis.R)]
 
                  Design formula ~ condition
 * significant cut-off threshold is padj < 0.05 & abs(log2FoldChange) >= 1
