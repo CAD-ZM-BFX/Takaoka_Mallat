@@ -50,7 +50,7 @@ Illumina NovaSeq6000 platform, paired-end reads (PE50)
 * single Cell RNASeq data: public data, please check the supplementary Tables (STable 17, STable 18).
 
 ## Corresponding Data/Tables are given below
-Supplementary_Tables_iWD paper.xlsx[[xlsx](./Figures_Tables/Supplementary Tables_iWD paper.xlsx)]
+Supplementary_Tables_iWD paper.xlsx[[XLSX](./Figures_Tables/Supplementary Tables_iWD paper.xlsx)]
 
 
 ## RNASeq analysis Methods
@@ -73,9 +73,9 @@ Paired-end (PE50), reverse stranded sequencing for Nrp1 WT versus Nrp1 KO perito
 (nextflow version 21.05.0, nf-core/rnaseq version 3.2)
 
 #### Sample sheet input for nextflow pipeline
-Macrophage_FirstBatch_nextflow_SampleTable.csv[[csv](Macrophage_FirstBatch_nextflow_SampleTable.csv)] <br>
-Macrophage_SecondBatch_nextflow_SampleTable.csv[[csv](Macrophage_SecondBatch_nextflow_SampleTable.csv)] <br>
-NRP1-nextflow_SampleTable.csv[[csv](NRP1-nextflow_SampleTable.csv)] <br>
+Macrophage_FirstBatch_nextflow_SampleTable.csv[[CSV](Macrophage_FirstBatch_nextflow_SampleTable.csv)] <br>
+Macrophage_SecondBatch_nextflow_SampleTable.csv[[CSV](Macrophage_SecondBatch_nextflow_SampleTable.csv)] <br>
+NRP1-nextflow_SampleTable.csv[[CSV](NRP1-nextflow_SampleTable.csv)] <br>
 
 #### Nextflow run pipeline command in HPC
 ```shell
