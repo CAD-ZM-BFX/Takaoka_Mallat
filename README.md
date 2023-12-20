@@ -97,9 +97,9 @@ nextflow run nf-core/rnaseq -bg -profile singularity -r 3.2 \
 Using R (v4.2.1) with DESeq2 (v1.36.0) & Gene Ontology Analysis
 
 The analysis code is <br>
-#### Macrophage_DESeq_GO_Analysis.R[[Rscript](./Scripts/Macrophage_DESeq_GO_Analysis.R)]
+#### Macrophage_DESeq_GO_Analysis.R[[Rscript](Scripts/Macrophage_DESeq_GO_Analysis.R)]
 
-#### Nrp1_DESeq_GO_Analysis.R[[Rscript](./Scripts/SLX-22500_DESEq_analysis_Feb_2023.R)]
+#### Nrp1_DESeq_GO_Analysis.R[[Rscript](Scripts/SLX-22500_DESEq_analysis_Feb_2023.R)]
 
                  Design formula ~ condition
 * significant cut-off threshold is padj < 0.05 & abs(log2FoldChange) >= 1
@@ -132,11 +132,11 @@ Extended data ST11 and Extended Fig 10.
 3 Mouse and 6 human public single cell RNASeq data were applied for identified macrophage clusters and then reclustering for detecting specific macrophage subtypes. Data summary is listed in Supplementary Table S17,18. <br>
 R package Seurat (version 4.2.0) was used to the clustering analysis. R scripts
 
-#### Mouse_integrated_scRNASeq_Analysis.R[[Rscript](./Scripts/Athero_Mouse_LDLR_Reclustered_Macrophage_June_2023.Rmd)]
+#### Mouse_integrated_scRNASeq_Analysis.R[[Rscript](Scripts/Athero_Mouse_LDLR_Reclustered_Macrophage_June_2023.Rmd)]
 
   Including Fig4d and and Extended Figure 13(a-c) and Extended Fig 7a,b for time course DEGs analysis.
 
-#### Human_integrated_scRNASeq_Analysis.R[[Rscript](./Scripts/Integrated_Human_N7_All.nb.Rmd)]
+#### Human_integrated_scRNASeq_Analysis.R[[Rscript](Scripts/Integrated_Human_N7_All.nb.Rmd)]
 
   Including Fig4e, 4f and Extended Figure 14(a-c)
 
