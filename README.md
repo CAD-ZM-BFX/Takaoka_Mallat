@@ -97,7 +97,7 @@ nextflow run nf-core/rnaseq -bg -profile singularity -r 3.2 \
 Using R (v4.2.1) with DESeq2 (v1.36.0) & Gene Ontology Analysis
 
 The analysis code is <br>
-#### Macrophage_DESeq_GO_Analysis.R[[Rscript](Scripts/Macrophage_DESeq_GO_Analysis.R)]
+#### Macrophage_DESeq_GO_Analysis.R[[Rscript](Scripts/Macrophage_merge_DESeq_GO_Analysis.R)]
 
 #### Nrp1_DESeq_GO_Analysis.R[[Rscript](Scripts/SLX-22500_DESEq_analysis_Feb_2023.R)]
 
