@@ -50,7 +50,7 @@ Illumina NovaSeq6000 platform, paired-end reads (PE50)
 * single Cell RNASeq data: public data, please check the supplementary Tables (STable 17, STable 18).
 
 ## Corresponding Data/Tables are given below
-Supplementary_Tables_iWD paper.xlsx [[XLSX](./Figures_Tables/Supplementary Tables_iWD paper.xlsx)]
+Supplementary Tables [[XLSX](./Figures_Tables/SupplementaryTable-446096_1_data_set_4306588_Dec_2023.xlsx)]
 
 
 ## RNASeq analysis Methods
@@ -99,7 +99,7 @@ Using R (v4.2.1) with DESeq2 (v1.36.0) & Gene Ontology Analysis
 The analysis code is <br>
 #### Macrophage_DESeq_GO_Analysis.R[[Rscript](./Scripts/Macrophage_DESeq_GO_Analysis.R)]
 
-#### Nrp1_DESeq_GO_Analysis.R[[Rscript](./Scripts/Nrp1_DESeq_GO_Analysis.R)]
+#### Nrp1_DESeq_GO_Analysis.R[[Rscript](./Scripts/SLX-22500_DESEq_analysis_Feb_2023.R)]
 
                  Design formula ~ condition
 * significant cut-off threshold is padj < 0.05 & abs(log2FoldChange) >= 1
@@ -109,20 +109,20 @@ The analysis code is <br>
 ## Step 3: Gene Ontology Analysis
 * Input data are the significant DEGs from DESeq analysis.
 * Using R package clusterProfiler (version 4.4.4), based on Biological Process mainly.
-* GeneOntology results are given in Supplementary Table STable 2 and STable 11 and Figure2a.
-* GeneOntology results for NRP1 KOvsWT are illustrated in both Fig4j and Supplementary Table S11.
+* GeneOntology results are given in Supplementary Table ST 2 and Figure 2a.
+* GeneOntology results for NRP1 KOvsWT are illustrated in both Fig4j and Supplementary Table ST12.
 
 ## Step 4: Transcription Factor (TF) binding motif enrichment analysis
 * Significant DEGs and non-significant (padj > 0.1 & abs(log2FoldChange) < 1)
 * R package Rcistarget (version 1.16.0) with motif rankings for  500 bp upstream of TSS and 100bp downstream was used in the analysis (mouse motif collection version 9, ‘mc9nr’, with
 24453 motifs).
-* Common motif listed in Supplementary Table STable 4.
-* Spic was selected and perform the GeneOntology analysis for its relating sig DEGs. see Supplementary Table S5.
+* Common motif listed in Supplementary Table ST4.
+* Spic was selected and perform the GeneOntology analysis for its relating sig DEGs. see Supplementary Table ST5.
 
 ## Step 5: GWAS Analysis
-* GWAS list relating to CVD (atherosclerosis) from EBI GWAS, see Supplementary Table STable 7 and also joint the table from supplementary table 13 of Tcheandjieu et al.<sup> 24 </sup>.
-* Overlap with iWD vs cWD sig/refined non-sig DEGs, barplot presented in Figure 4a and Supplementary Table S6.
-* GWAS data is also overlap with single cell integrating analysis of mouse for macrophage subtypes, see Supplementary Table S7.
+* GWAS list relating to CVD (atherosclerosis) from EBI GWAS, see Supplementary Table ST22,23 and also joint the table from supplementary table 13 of Tcheandjieu et al.<sup> 24 </sup>.
+* Overlap with iWD vs cWD sig/refined non-sig DEGs, barplot presented in Figure 4a and Supplementary Table ST6.
+* GWAS data is also overlap with single cell integrating analysis of mouse for macrophage subtypes, see Supplementary Table ST7.
 
 **Causal CVD GWAS pathway Analysis** <br>
 Extended data ST11 and Extended Fig 10.
@@ -155,33 +155,18 @@ And each individual study analysis R scripts are used from Alma Zernecke et al (
 |Fig4b | [[PDF](Figures_Tables/Fig4b-MacMer_sigDEGs_overlapCelltype_gwas_piechart_group3_Jan_2022.pdf)] |<IMG SRC="Figures_Tables/Fig4b-MacMer_sigDEGs_overlapCelltype_gwas_piechart_group3_Jan_2022.pdf.png" width=800px>|  pie chart to show the proportion of the DEGs overlap with GWAS with the macrophage sub-types.|
 |Fig4c | [[PDF](Figures_Tables/Fig4c-Fernandez_2020_Human_SymAsym_VolcanoPlot_Jan_2023_gwas.pdf)] |<IMG SRC="Figures_Tables/Fig4c-Fernandez_2020_Human_SymAsym_VolcanoPlot_Jan_2023_gwas.pdf.png" width=800px>|  Volcano plot using Fernandez (2020) human data for SymvsAsym plaques data. |
 |Fig4d | [[PDF](Figures_Tables/Fig4d-scRNASeqvG_Mouse_integrated_selMac_dotplot_selMarkers_MerCluster_Res12_C19_MC3_D18_12_2023.pdf)] |<IMG SRC="Figures_Tables/Fig4d-scRNASeqvG_Mouse_integrated_selMac_dotplot_selMarkers_MerCluster_Res12_C19_MC3_D18_12_2023.png" width=800px>|  Dotplot for selected markers of Mouse public atherosclerosis integrated scRNASeq data.|
-|Fig4e | [[PDF](Figures_Tables/ig4e-scRNASeqHuman_integrated_selMac_dotplot_selMarkers_C3_18_12_2023.pdf)] |<IMG SRC="Figures_Tables/ig4e-scRNASeqHuman_integrated_selMac_dotplot_selMarkers_C3_18_12_2023.png" width=800px>| Dotplot for selected markers of Human public atherosclerosis integrated scRNASeq data.|
+|Fig4e | [[PDF](Figures_Tables/Fig4e-scRNASeqHuman_integrated_selMac_dotplot_selMarkers_C3_18_12_2023.pdf)] |<IMG SRC="Figures_Tables/Fig4e-scRNASeqHuman_integrated_selMac_dotplot_selMarkers_C3_18_12_2023.png" width=800px>| Dotplot for selected markers of Human public atherosclerosis integrated scRNASeq data.|
 |Fig4f | [[PDF](Figures_Tables/Fig4f-Human_scRNASeq_Selcted_NRP1_highvslow_Barplot_N.pdf)] |<IMG SRC="Figures_Tables/Fig4f-Human_scRNASeq_Selcted_NRP1_highvslow_Barplot_N.pdf.png" width=800px>|  Selected Biological process Gene ontology pathways for human NRP1 high clusters vs NRP1 low clusters. |
 |Fig4j| [[PDF](Figures_Tables/Fig4j-Mouse_cWD_KOvsWT_Selcted_NRP1_highvslow_Barplot_N.pdf)] |<IMG SRC="Figures_Tables/Fig4j-Mouse_cWD_KOvsWT_Selcted_NRP1_highvslow_Barplot_N.pdf.png" width=800px>|  Selected Biological process Gene ontology pathways for mouse cWD NRP1 KOvsWT. |
-|ExtFig7a | [[PDF](Figures_Tables/ExtFig7a-Heatmap_DEGs_MAST_GlobalC3_acrossTime_noall_selMarkers_Dec_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig7a-Heatmap_DEGs_MAST_GlobalC3_acrossTime_noall_selMarkers_Dec_2023.png" width=800px>|  A heatmap of selected markers for each macrophage subtype (Res = Resident; MacAIR/Trem2; IFN/
-Inflam = interferon/inflammatory) derived from analysis of the mouse public data set on scRNASeq of
-atheroscleroAc lesions in Ldlr−/− mice subjected to various duraAons of conAnuous high fat diet (HFD).
-Hierarchical clustering is shown based on log2FoldChange. |
-|ExtFig7b| [[PDF](Figures_Tables/ExtFig7b-Mouse_Mac_Proportion_HFDvsCtrl_Time_StackedBar_07112023_version1_update_29112023.pdf)] |<IMG SRC="Figures_Tables/ExtFig7b-Mouse_Mac_Proportion_HFDvsCtrl_Time_StackedBar_07112023_version1_update_29112023.png" width=800px>|  Barplot for three macrophage subtype
-proporAons for each duraAon of conAnuous HFD. |
-|ExtFig10| [[PDF](Figures_Tables/ExtFig10-CVD_CasusalGenes_selPathway_cnetplot_112023_2.pdf)] |<IMG SRC="Figures_Tables/ExtFig10-CVD_CasusalGenes_selPathway_cnetplot_112023_2.png" width=800px>|  Gene ontology enrichment analysis of biological processes (BP) was conducted on 220 coronary
-artery disease causal genes prioriAsed in Aragam et al, 2022. A total of 178 out of 220 causal genes
-contributed to the GO enrichment analysis, and 867 enriched BP were idenAfied (see Supplementary
-Table 11). The most enriched pathways and their corresponding causal gene network are ploBed here
-using cnetplot funcAon in R. Significant differenAally expressed genes in our RNASeq data of aorAc
-macrophages from iWD vs cWD (see Supplementary Table 1) are shown here (red: upregulated in
-iWD, blue: downregulated in iWD). NRP1 is represented in the most enriched biological pathways,
-which are related to cell migraAon, acAn filament organisaAon, and vascular development|
-|ExtFig13a| [[PDF](Figures_Tables/ExtFig13a_Mouse_integrated_all_UMAP_MacGenes_Add_Adgre1_Fcgr1_Jun_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig13a_Mouse_integrated_all_UMAP_MacGenes_Add_Adgre1_Fcgr1_Jun_2023.png" width=800px>|  UMAP integraAng all cell clusters (leU), and FeaturePlot of the selected macrophage markers
-(right) (see Methods). |
-|ExtFig13b| [[PDF](Figures_Tables/ExtFig13b_v1_Macrophage_Ldlr_ChowHFD_res12_c19_seldefineColor_UMAP_subMac_18_12_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig13b_v1_Macrophage_Ldlr_ChowHFD_res12_c19_seldefineColor_UMAP_subMac_18_12_2023.png" width=800px>|  UMAP depicAng macrophage re-clustering and
-annotaAon assignment, highlighAng the MacAIR cells from Williams et al. (2020). |
-|ExtFig13c| [[PDF](Figures_Tables/ExtFig13c_v1_Macrophage_Ldlr_ChowHFD_res12_c19_seldefineColor_UMAP_subMac_GlobalF_18_12_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig13c_v1_Macrophage_Ldlr_ChowHFD_res12_c19_seldefineColor_UMAP_subMac_GlobalF_18_12_2023.png" width=800px>| UMAP depicAng macrophage re-clustering split by studies. |
-|ExtFig14a| [[PDF](Figures_Tables/ExtFig14a-Human_integrated_all_UMAP_MacGenes_Nov_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig14a-Human_integrated_all_UMAP_MacGenes_Nov_2023.png" width=800px>|  UMAP integraAng all cell clusters (leU), and FeaturePlot of the selected
-macrophage markers (right) (see Methods). |
-|ExtFig14b| [[PDF](Figures_Tables/ExtFig14b-Human_Macrophage_reclustered_UMAP_all_Nov_2023.pdf)] |<IMG SRC="Figures_Tables/EExtFig14b-Human_Macrophage_reclustered_UMAP_all_Nov_2023.png" width=800px>| UMAP depicAng macrophage re-clustering and annotaAon assignment |
-|ExtFig14c| [[PDF](Figures_Tables/ExtFig14c-Human_Macrophage_reclustered_UMAP_bystudy_Nov_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig14c-Human_Macrophage_reclustered_UMAP_bystudy_Nov_2023.png" width=800px>|  UMAP depicAng
-macrophage re-clustering split by studies |
+|ExtFig7a | [[PDF](Figures_Tables/ExtFig7a-Heatmap_DEGs_MAST_GlobalC3_acrossTime_noall_selMarkers_Dec_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig7a-Heatmap_DEGs_MAST_GlobalC3_acrossTime_noall_selMarkers_Dec_2023.png" width=800px>|  A heatmap of selected markers for each macrophage subtype derived from analysis of the mouse public data set on scRNASeq of atherosclerosis lesions in Ldlr−/− mice subjected to various durations of continuous high fat diet (HFD).Hierarchical clustering is shown based on log2FoldChange. |
+|ExtFig7b| [[PDF](Figures_Tables/ExtFig7b-Mouse_Mac_Proportion_HFDvsCtrl_Time_StackedBar_07112023_version1_update_29112023.pdf)] |<IMG SRC="Figures_Tables/ExtFig7b-Mouse_Mac_Proportion_HFDvsCtrl_Time_StackedBar_07112023_version1_update_29112023.png" width=800px>|  Barplot for three macrophage subtype proportions for each duration of continuous HFD. |
+|ExtFig10| [[PDF](Figures_Tables/ExtFig10-CVD_CasusalGenes_selPathway_cnetplot_112023_2.pdf)] |<IMG SRC="Figures_Tables/ExtFig10-CVD_CasusalGenes_selPathway_cnetplot_112023_2.png" width=800px>|  Gene ontology enrichment analysis of biological processes (BP) was conducted on 220 coronary artery disease causal genes prioritised in Aragam et al, 2022. A total of 178 out of 220 causal genes contributed to the GO enrichment analysis, and 867 enriched BP were idenAfied (see Supplementary Table 11). The most enriched pathways and their corresponding causal gene network are ploBed here using cnetplot function in R. Significant differentially expressed genes in our RNASeq data of aortic macrophages from iWD vs cWD (see Supplementary Table 1) are shown here (red: upregulated in iWD, blue: downregulated in iWD). NRP1 is represented in the most enriched biological pathways, which are related to cell migration, actin filament organisation, and vascular development|
+|ExtFig13a| [[PDF](Figures_Tables/ExtFig13a_Mouse_integrated_all_UMAP_MacGenes_Add_Adgre1_Fcgr1_Jun_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig13a_Mouse_integrated_all_UMAP_MacGenes_Add_Adgre1_Fcgr1_Jun_2023.png" width=800px>|Integrating mouse public scRNSeq data: UMAP integrating all cell clusters (left), and FeaturePlot of the selected macrophage markers (right) (see Methods). |
+|ExtFig13b| [[PDF](Figures_Tables/ExtFig13b_v1_Macrophage_Ldlr_ChowHFD_res12_c19_seldefineColor_UMAP_subMac_18_12_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig13b_v1_Macrophage_Ldlr_ChowHFD_res12_c19_seldefineColor_UMAP_subMac_18_12_2023.png" width=800px>|Integrating mouse public scRNSeq data: UMAP depicting macrophage re-clustering and annotation assignment, highlighting the MacAIR cells from Williams et al. (2020). |
+|ExtFig13c| [[PDF](Figures_Tables/ExtFig13c_v1_Macrophage_Ldlr_ChowHFD_res12_c19_seldefineColor_UMAP_subMac_GlobalF_18_12_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig13c_v1_Macrophage_Ldlr_ChowHFD_res12_c19_seldefineColor_UMAP_subMac_GlobalF_18_12_2023.png" width=800px>|Integrating mouse public scRNSeq data: UMAP depicting macrophage re-clustering split by studies. |
+|ExtFig14a| [[PDF](Figures_Tables/ExtFig14a-Human_integrated_all_UMAP_MacGenes_Nov_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig14a-Human_integrated_all_UMAP_MacGenes_Nov_2023.png" width=800px>|Integrating human public scRNSeq data: UMAP integrating all cell clusters (left), and FeaturePlot of the selected macrophage markers (right) (see Methods). |
+|ExtFig14b| [[PDF](Figures_Tables/ExtFig14b-Human_Macrophage_reclustered_UMAP_all_Nov_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig14b-Human_Macrophage_reclustered_UMAP_all_Nov_2023.png" width=800px>| Integrating human public scRNSeq data: UMAP depicting macrophage re-clustering and annotation assignment |
+|ExtFig14c| [[PDF](Figures_Tables/ExtFig14c-Human_Macrophage_reclustered_UMAP_bystudy_Nov_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig14c-Human_Macrophage_reclustered_UMAP_bystudy_Nov_2023.png" width=800px>| Integrating human public scRNSeq data: UMAP depicting macrophage re-clustering split by studies |
 
 **Supplementary Table**
 SupplementaryTable-446096_1_data_set_4306588_s5ywqc.xlsx[[xlsx](Figures_Tables/SupplementaryTable-446096_1_data_set_4306588_s5ywqc.xlsx)] <br>
