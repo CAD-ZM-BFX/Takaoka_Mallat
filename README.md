@@ -168,8 +168,6 @@ And each individual study analysis R scripts are used from Alma Zernecke et al (
 |ExtFig14b| [[PDF](Figures_Tables/ExtFig14b-Human_Macrophage_reclustered_UMAP_all_Nov_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig14b-Human_Macrophage_reclustered_UMAP_all_Nov_2023.png" width=800px>| Integrating human public scRNSeq data: UMAP depicting macrophage re-clustering and annotation assignment |
 |ExtFig14c| [[PDF](Figures_Tables/ExtFig14c-Human_Macrophage_reclustered_UMAP_bystudy_Nov_2023.pdf)] |<IMG SRC="Figures_Tables/ExtFig14c-Human_Macrophage_reclustered_UMAP_bystudy_Nov_2023.png" width=800px>| Integrating human public scRNSeq data: UMAP depicting macrophage re-clustering split by studies |
 
-**Supplementary Table**
-SupplementaryTable-446096_1_data_set_4306588_s5ywqc.xlsx[[xlsx](Figures_Tables/SupplementaryTable-446096_1_data_set_4306588_s5ywqc.xlsx)] <br>
 
 
 
