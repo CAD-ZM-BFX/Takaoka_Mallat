@@ -10,7 +10,7 @@ Habenicht<sup>11</sup>, Alain Tedgui<sup>7</sup>, Hafid Ait-Oufella<sup>7</sup>,
 Christiana Ruhrberg<sup>12</sup>, Soraya Taleb<sup>7</sup>, Jesse W. Williams<sup>8</sup>, Olli T. Raitakari<sup>4,5,20\*</sup>,
 Véronique Angeli<sup>2,3\*</sup>, Ziad Mallat<sup>1,7</sup>
 Journal xxx,  [![DOI](https://doi.org/***)](https://doi.org/***) <br>
- 
+
 <sup>1</sup> Department of Medicine, Cardiovascular Division, University of Cambridge, Heart and Lung Research Institute, CB2 0BB, Cambridge, UK, <br>
 <sup>2</sup> Immunology Translational Research Programme, Yong Loo Lin School of Medicine, Dept. of Department of Microbiology and Immunology, National University of Singapore, Singapore. <br>
 <sup>3</sup> Immunology Programme, Life Sciences Institute, National University of Singapore, Singapore.<br>
@@ -50,7 +50,7 @@ Illumina NovaSeq6000 platform, paired-end reads (PE50)
 * single Cell RNASeq data: public data, please check the supplementary Tables (STable 17, STable 18).
 
 ## Corresponding Data/Tables are given below
-Supplementary_Tables_iWD paper.xlsx[[XLSX](./Figures_Tables/Supplementary Tables_iWD paper.xlsx)]
+Supplementary_Tables_iWD paper.xlsx [[XLSX](./Figures_Tables/Supplementary Tables_iWD paper.xlsx)]
 
 
 ## RNASeq analysis Methods
@@ -98,6 +98,7 @@ Using R (v4.2.1) with DESeq2 (v1.36.0) & Gene Ontology Analysis
 
 The analysis code is <br>
 #### Macrophage_DESeq_GO_Analysis.R[[Rscript](./Scripts/Macrophage_DESeq_GO_Analysis.R)]
+
 #### Nrp1_DESeq_GO_Analysis.R[[Rscript](./Scripts/Nrp1_DESeq_GO_Analysis.R)]
 
                  Design formula ~ condition
@@ -112,7 +113,7 @@ The analysis code is <br>
 * GeneOntology results for NRP1 KOvsWT are illustrated in both Fig4j and Supplementary Table S11.
 
 ## Step 4: Transcription Factor (TF) binding motif enrichment analysis
-* Significant DEGs and non-significant (p > 0.1 & abs(log2FoldChange) < 1)
+* Significant DEGs and non-significant (padj > 0.1 & abs(log2FoldChange) < 1)
 * R package Rcistarget (version 1.16.0) with motif rankings for  500 bp upstream of TSS and 100bp downstream was used in the analysis (mouse motif collection version 9, ‘mc9nr’, with
 24453 motifs).
 * Common motif listed in Supplementary Table STable 4.
@@ -120,18 +121,23 @@ The analysis code is <br>
 
 ## Step 5: GWAS Analysis
 * GWAS list relating to CVD (atherosclerosis) from EBI GWAS, see Supplementary Table STable 7 and also joint the table from supplementary table 13 of Tcheandjieu et al.<sup> 24 </sup>.
-* Overlap with iWDvscWD sig/refined non-sig DEGs, barplot presented in Figure 4a and Supplementary Table S6.
+* Overlap with iWD vs cWD sig/refined non-sig DEGs, barplot presented in Figure 4a and Supplementary Table S6.
 * GWAS data is also overlap with single cell integrating analysis of mouse for macrophage subtypes, see Supplementary Table S7.
 
 
 ## Intergrated public single cell RNASeq Analysis
 3 Mouse and 6 human public single cell RNASeq data were applied for identified macrophage clusters and then reclustering for detecting specific macrophage subtypes. Data summary is listed in Supplementary Table S17,18. <br>
 R package Seurat (version 4.2.0) was used to the clustering analysis. R scripts
-#### Mouse_integrated_scRNASeq_Analysis.R[[Rscript](./Scripts/Mouse_integrated_scRNASeq_Analysis.R)]
-#### Human_integrated_scRNASeq_Analysis.R[[Rscript](./Scripts/Mouse_integrated_scRNASeq_Analysis.R)]
-And each individual study analysis R scripts are given as below.
-#### Mouse_integrated_scRNASeq_Analysis.R[[Rscript](./Scripts/Mouse_integrated_scRNASeq_Analysis.R)]
-#### Human_integrated_scRNASeq_Analysis.R[[Rscript](./Scripts/Mouse_integrated_scRNASeq_Analysis.R)]
+
+#### Mouse_integrated_scRNASeq_Analysis.R[[Rscript](./Scripts/Athero_Mouse_LDLR_Reclustered_Macrophage_June_2023.Rmd)]
+
+  Including Fig4d and and Extended Figure 10(a-c)
+  
+#### Human_integrated_scRNASeq_Analysis.R[[Rscript](./Scripts/Integrated_Human_N7_All.nb.Rmd)]
+
+  Including Fig4e, 4f and Extended Figure 11(a-c)
+
+And each individual study analysis R scripts are used from Alma Zernecke et al (2022, Cardiovasular Research, https://doi.org/10.1093/cvr/cvac161) paper Supplementary material.
 
 
 ### Corresponding Figures are given below
@@ -195,4 +201,4 @@ other attached packages:
 
 ## Contact
 
-Contact Xiaohui Zhao (xz289 -at- cam.ac.uk) 
+Contact Xiaohui Zhao (xz289 -at- cam.ac.uk)

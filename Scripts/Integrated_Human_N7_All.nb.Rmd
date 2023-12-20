@@ -1,0 +1,591 @@
+---
+title: "Align human athero dataset in Seurat v4.2.0"
+output:
+  html_document:
+    df_print: paged
+---
+
+Basic settings and load the pre-processed datasets (see notebooks in the corresponding folder, "Pre-processing_Human_Data") and add necessary metadata info where it's missing.
+
+```{r}
+setwd('/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/')
+library(Seurat)
+library(ggplot2)
+library(viridis)
+library(RColorBrewer)
+library(dplyr)
+library(cowplot)
+library(tidyr)
+library(tidyverse)
+library(xlsx)
+
+load(file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Alsaigh_ComBio/Alsaigh_merged.Robj")
+load(file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Chowdhury_Circu/Chowdhury_merged.Robj")
+load(file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Fernandez_NatMed/plaquemac_unfiltered.Robj")
+load(file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Fernandez_NatMed/CITE_seq_Plaque/hplaque_cite_mac.Robj")
+load(file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Li_Circu/Li_merged.Robj")
+load(file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Pan_Circu/pan_merged.Robj")
+load(file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Wirka_NatMed/coronary.Robj")
+
+```
+
+merge the 7 data set and recluster to find the macrophage subclusters and select.
+
+```{r}
+
+human_merge<- merge(x=Alsaigh_merged, y=list(Chowdhury_merged, plaquemac_unfiltered, 
+                                       hplaque_cite_mac, Li_merged, pan_merged,
+                                       coronary))
+
+human.cca.list <- SplitObject(human_merge, split.by = "Protocol")
+
+human.cca.list <- human.cca.list[c("Alsaigh", "Chowdhury", "Fernandez", "Fernandez_CITE_MAC", "Li", "Pan", "Wikra")]
+
+```
+
+
+```{r}
+
+for (i in 1:length(human.cca.list)) {
+    human.cca.list[[i]] <- NormalizeData(human.cca.list[[i]], verbose = FALSE)
+    human.cca.list[[i]] <- FindVariableFeatures(human.cca.list[[i]], selection.method = "vst", 
+        nfeatures = 1000, verbose = FALSE)
+}
+```
+
+Use k.filter at 150 (data set with lowest number of cells)::
+
+```{r}
+reference.list <- human.cca.list[c("Alsaigh", "Chowdhury", "Fernandez", "Fernandez_CITE_MAC", "Li", "Pan", "Wikra")]
+human.cca.anchors <- FindIntegrationAnchors(object.list = reference.list, anchor.features = 1000, dims = 1:30, k.filter=150)
+```
+
+```{r}
+human.cca.integrated <- IntegrateData(anchorset = human.cca.anchors, dims = 1:30)
+```
+
+```{r}
+DefaultAssay(human.cca.integrated) <- "integrated"
+```
+
+
+```{r}
+human.cca.integrated <- ScaleData(human.cca.integrated, verbose = FALSE)
+human.cca.integrated <- RunPCA(human.cca.integrated, npcs = 30, verbose = FALSE)
+```
+
+```{r}
+human.cca.integrated  <- JackStraw(human.cca.integrated , num.replicate = 100)
+human.cca.integrated  <- ScoreJackStraw(human.cca.integrated , dims = 1:20)
+```
+
+```{r}
+save(human.cca.integrated,file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/human.cca.integrated.Robj")
+```
+
+```{r}
+JackStrawPlot(human.cca.integrated , dims = 1:20)
+```
+
+```{r}
+human.cca.integrated <- RunUMAP(human.cca.integrated, reduction = "pca", dims = 1:20)
+```
+
+```{r}
+human.cca.integrated  <- FindNeighbors(human.cca.integrated , dims = 1:20)
+human.cca.integrated  <- FindClusters(human.cca.integrated , resolution = 0.3)
+```
+
+```{r}
+head(human.cca.integrated@meta.data)
+Idents(human.cca.integrated)="integrated_snn_res.0.3"
+UMAPPlot(human.cca.integrated, label=T)
+save(human.cca.integrated, file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/human.cca.integrated.Robj")
+```
+
+
+```{r}
+human.cca.markers03 <- FindAllMarkers(human.cca.integrated, only.pos = T) ##20 cluster
+```
+
+
+```{r}
+head(human.cca.integrated@meta.data)
+save(human.cca.markers03, file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/CCA_HUMAN_POS_MARKERS_RES03.Robj")
+```
+
+```{r}
+CCA_HUMAN_MARKERS=FindAllMarkers(human.cca.integrated)
+```
+
+```{r}
+save(CCA_HUMAN_MARKERS,file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/CCA_HUMAN_MARKERS.Robj")
+```
+
+```{r}
+human.cca.average03=AverageExpression(human.cca.integrated, return.seurat = T)
+```
+
+```{r}
+save(human.cca.average03,file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/human.cca.average03.Robj")
+```
+
+```{r, selected macrophage genes markers}
+MAC_genes <- c("CXCL8", "CCL4", "CXCL2", "IER3", "CLEC4E", "IL1B", "CD74", "HLA-DRA", "FABP4", 
+               "APOC1", "GPNMB","LGALS3","TREM2", "CD9", "APOE", "CTSD", "SPP1", "MARCO", 
+               "F13A1", "LGMN", "FOLR2", "CD163", "TIMD4", "LYVE1",  
+              "NRP1", "IFI44L", "XIST", "FCGR3A",  "CX3CR1", "IFI6", "EGR1")
+test.cca.integrated <- human.cca.integrated
+DefaultAssay(test.cca.integrated) <- "RNA"
+MAC_marker_list <- list(MAC_genes)
+MAC_object <- AddModuleScore(object = test.cca.integrated, features = MAC_marker_list, name = "MAC_marker_score")
+
+message("+----- Extended data Fig. 11a-----------------------------------+ ")
+
+pdf("/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/ExtFig11a-Human_integrated_all_UMAP_MacGenes_Nov_2023.pdf", width=9, height=4, onefile = T)
+plt_umap   <- UMAPPlot(human.cca.integrated, label=T) + theme(legend.position="none")
+plt_mac <- FeaturePlot(object = MAC_object, features = "MAC_marker_score1") +
+     scale_size(range = c(2, 7)) + theme(plot.title = element_blank())+
+     scale_colour_gradientn(colours = rev(brewer.pal(n = 11, name = "RdBu")))
+plot_grid(plt_umap, plt_mac, ncol = 2)
+dev.off()
+
+```
+From the paper by Zernecke's paper Supplementary Table 3 human MPC markers, we plot the sub type of Macrophages UMAP plot to select the clusters of macrophage from our integrated object.
+
+```{r, all marcrophage markers}
+
+MAC_genes_Data <- read.xlsx("/Users/xz289/Documents/Minoru/Seurat_v3/cvac161_supplementary_data/Supp_xls_3_Human_MPC_Marker_Genes.xlsx", sheetIndex = 1, header = T)
+colnames(MAC_genes_Data) <- MAC_genes_Data[1,]
+MAC_genes_Data <-MAC_genes_Data[-1,]
+
+ResMAC_genes     <- MAC_genes_Data[MAC_genes_Data$cluster=="LYVE1_Mac", "gene"]
+FoamyMAC_genes   <- MAC_genes_Data[MAC_genes_Data$cluster=="Foamy_Mac", "gene"] 
+C3MAC_genes      <- MAC_genes_Data[MAC_genes_Data$cluster=="C3_Mac", "gene"]
+IFNICMAC_genes   <- MAC_genes_Data[MAC_genes_Data$cluster=="IFNIC_Mac", "gene"]
+InflamMAC_genes  <- MAC_genes_Data[MAC_genes_Data$cluster=="Inflammatory_Mac", "gene"]
+
+## check the macrophage clusters first
+MAC_ALL <- list(unique(c(ResMAC_genes, FoamyMAC_genes, C3MAC_genes, IFNICMAC_genes, InflamMAC_genes)))
+MACALL_object <- AddModuleScore(object = test.cca.integrated, features = MAC_ALL, name = "MACALL_marker_score")
+plt_1 <- FeaturePlot(object = MACALL_object, features = "MACALL_marker_score1", raster=F) +
+  scale_colour_gradientn(colours = rev(brewer.pal(n = 11, name = "RdBu")))
+
+```
+```{r, Res-like, LYVE1}
+MAC_Res <- list(ResMAC_genes)
+MACRes_object <- AddModuleScore(object = test.cca.integrated, features = MAC_Res, name = "MACRes_marker_score")
+plt_Res <- FeaturePlot(object = MACRes_object, features = "MACRes_marker_score1", raster=F) +
+  scale_colour_gradientn(colours = rev(brewer.pal(n = 11, name = "RdBu")))
+```
+```{r, Foamy like, TREM2}
+MAC_Foam <- list(FoamyMAC_genes)
+MACFoam_object <- AddModuleScore(object = test.cca.integrated, features = MAC_Foam, name = "MACFoam_marker_score")
+plt_Foam <- FeaturePlot(object = MACFoam_object, features = "MACFoam_marker_score1", raster=F) +
+  scale_colour_gradientn(colours = rev(brewer.pal(n = 11, name = "RdBu")))
+```
+```{r, C3 inflam} 
+MAC_C3 <- list(C3MAC_genes)
+MACC3_object <- AddModuleScore(object = test.cca.integrated, features = MAC_C3, name = "MACC3_marker_score")
+plt_C3 <- FeaturePlot(object = MACC3_object, features = "MACC3_marker_score1", raster=F) +
+  scale_colour_gradientn(colours = rev(brewer.pal(n = 11, name = "RdBu")))
+```
+```{r, IFNIC mac}
+MAC_IFNIC <- list(IFNICMAC_genes)
+MACIFNIC_object <- AddModuleScore(object = test.cca.integrated, features = MAC_IFNIC, name = "MACIFNIC_marker_score")
+plt_IFNIC <- FeaturePlot(object = MACIFNIC_object, features = "MACIFNIC_marker_score1", raster=F) +
+  scale_colour_gradientn(colours = rev(brewer.pal(n = 11, name = "RdBu")))
+
+```
+
+```{r, inflammation}
+MAC_Inflam <- list(InflamMAC_genes)
+MACInflam_object <- AddModuleScore(object = test.cca.integrated, features = MAC_Inflam, name = "MACInflam_marker_score")
+plt_Inflam <- FeaturePlot(object = MACInflam_object, features = "MACInflam_marker_score1", raster=F) +
+  scale_colour_gradientn(colours = rev(brewer.pal(n = 11, name = "RdBu")))
+
+```
+
+Join the cluster plot with the sub type of macrophages' features plot.
+
+```{r}
+pdf("Human_Integrated_UMAP_highlight_MACFeatures_30_Jan_2023.pdf", width = 10, height = 4)
+plt_2 + plt_Res
+plt_2 + plt_Foam
+plt_2 + plt_C3
+plt_2 + plt_IFNIC
+plt_2 + plt_Inflam
+dev.off()
+
+ntest <- FindClusters(human.cca.integrated , resolution = 0.8)
+plt_3 <- UMAPPlot(ntest, label=T)
+pdf("Human_Integrated_UMAP_highlight_MACFeatures_Res08_30_Jan_2023.pdf", width = 10, height = 4)
+plt_3 + plt_Res
+plt_3 + plt_Foam
+plt_3 + plt_C3
+plt_3 + plt_IFNIC
+plt_3 + plt_Inflam
+dev.off()
+```
+
+
+
+```{r}
+top10 <-CCA_HUMAN_MARKERS %>% group_by(cluster) %>% top_n(n = 10, wt = avg_log2FC)
+
+heat<- DoHeatmap(human.cca.average03, features = top10$gene, draw.lines = F,group.bar = F,size = 4, angle = 90, raster=F) + NoLegend()
+
+#heat
+```
+Select the macrophage clusters and recluster.
+
+```{r}
+FeaturePlot(object = human.cca.integrated, features = c("CSF1R"), raster=F) +
+  scale_colour_gradientn(colours = rev(brewer.pal(n = 11, name = "RdBu")))
+MAC_ONLY <- subset(human.cca.integrated, idents= c(3,5,12,18,14,15)) ## 28798 features, 25133 cells
+
+UMAPPlot(MAC_ONLY)
+```
+
+In the paper, MHCII Mac have been renamed "Inflammatory Mac" to be consistent with the mouse nomenclature we employed
+
+
+```{r}
+UMAPPlot(human.cca.integrated, group.by="Patients")+scale_color_brewer(palette = "Paired")
+```
+
+
+
+```{r}
+Idents(human.cca.integrated)="integrated_snn_res.0.3"
+```
+
+#### Repartition of clusters across patients/vessels
+
+The figures in the paper had been done with a "manual" code using ggplot2, similar data visualisation can be mor easily obtained using dittoSeq
+
+```{r}
+library(dittoSeq)
+dittoBarPlot(human.cca.integrated, var = Idents(human.cca.integrated),group.by = "Patients", scale = "percent")+
+scale_fill_manual(values=rainbow(20))
+```
+
+```{r}
+MAC_Reclustered=FindVariableFeatures(MAC_ONLY)
+MAC_Reclustered<- ScaleData(MAC_Reclustered, verbose = FALSE)
+MAC_Reclustered<- RunPCA(MAC_Reclustered, npcs = 30, verbose = FALSE)
+MAC_Reclustered<- RunUMAP(MAC_Reclustered, dims = 1:30)
+```
+
+```{r}
+MAC_Reclustered <- FindNeighbors(MAC_Reclustered, dims = 1:30)
+MAC_Reclustered <- FindClusters(MAC_Reclustered, resolution = 0.8)
+```
+
+
+```{r}
+Reclustered_UMAP=UMAPPlot(MAC_Reclustered, label = T, raster = F)
+Reclustered_UMAP
+```
+
+```{r}
+Reclustered_Markers=FindAllMarkers(MAC_Reclustered,  only.pos = T)
+```
+
+```{r}
+save(Reclustered_Markers, file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Reclustered_Markers.Robj")
+
+save(MAC_Reclustered, file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/MAC_Reclustered.Robj")
+
+```
+
+
+```{r}
+top10 <- Reclustered_Markers %>% group_by(cluster) %>% top_n(n = 10, wt =avg_log2FC)
+
+top10
+```
+
+
+#### annotate the clusters corresponding to macrophage subtypes
+
+```{r}
+new.fcluster.ids <- c("IFNIC", "Foamy", "Res", "IFNIC", "Res", "Inflam", "Inflam",
+                     "Inflam", "Res", "Res", "Inflam", "MixMac", "MixMac", "Inflam", 
+                     "Res", "Foamy", "IFNIC", "MixMac", "Inflam", "MixMac", "Foamy", "MixMac",
+                     "Res", "MixMac")
+newReclustered_Mac <- MAC_Reclustered
+names(new.fcluster.ids) <- levels(newReclustered_Mac)
+newReclustered_Mac <- RenameIdents(newReclustered_Mac, new.fcluster.ids)
+
+newReclustered_Mac@meta.data$FineCluster     <- Idents(newReclustered_Mac)
+newReclustered_Mac@meta.data$FineCluster     <- factor(newReclustered_Mac@meta.data$FineCluster, levels = c("Res", "Foamy", "IFNIC", "Inflam", "MixMac"))
+newReclustered_Mac[["old.ident"]] <- Idents(object =newReclustered_Mac)
+plt_fumap<- DimPlot(newReclustered_Mac, reduction = "umap", label = TRUE, pt.size = 0.5) + NoLegend()
+
+
+new.cluster.ids <- c("IFN/Inflam", "Foamy", "Res", "IFN/Inflam", "MixMac")
+names(new.cluster.ids) <- levels(newReclustered_Mac)
+
+newReclustered_Mac <- RenameIdents(newReclustered_Mac, new.cluster.ids)
+newReclustered_Mac[["new.ident"]] <- Idents(object =newReclustered_Mac)
+plt_umap<- DimPlot(newReclustered_Mac, reduction = "umap", label = TRUE, pt.size = 0.5) + NoLegend()
+
+
+
+message("+----- Extended data Fig. 11b, revised on Nov/2023 to make colors consistent-----------------------------------+ ")
+
+pdf("/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/ExtFig11b-Human_Macrophage_reclustered_UMAP_all_Nov_2023.pdf",
+    width=8, height = 4, onefile = T)
+
+umap_all  <- UMAPPlot(newReclustered_Mac, label=T) + theme(legend.position = "none") +
+  scale_color_manual(values=c(  "gray",  "#4B0082","darkred", "cyan")) 
+
+umap_all1 <- UMAPPlot(MAC_Reclustered, label=T) + theme(legend.position = "none")
+plot_grid(umap_all1, umap_all, ncol = 2)
+dev.off()
+
+message("+----- Extended data Fig. 11c-----------------------------------+ ")
+
+pdf("/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/ExtFig11c-Human_Macrophage_reclustered_UMAP_bystudy_Nov_2023.pdf",
+    width = 9, height = 9, onefile = T)
+umap_split <- UMAPPlot(newReclustered_Mac, label=F, split.by= "Protocol", ncol = 3) + theme(legend.position = "none")+
+  scale_color_manual(values=c("gray",  "#4B0082","darkred", "cyan"))
+umap_split
+dev.off()
+
+
+message("+-------------Figure 4e, revised on 03112023, reordered the markers by macrophage types consistency with mouse scRNASeq. Fig4d.-----------------------------------------------------------+")
+
+DefaultAssay(newReclustered_Mac) <- "RNA"
+
+MAC_genes_ord <- c("CD163", "NRP1","LYVE1", "TIMD4", "FOLR2", "LGMN",  "F13A1",   
+ "LGALS3", "CD9","MARCO", "FABP4","CTSD","SPP1", "GPNMB", "APOC1","TREM2","IFI6","APOE", 
+ "IL1B", "CXCL8",  "IER3",  "FCGR3A", "CXCL2", "CCL4", "XIST", "IFI44L","HLA-DRA",
+  "CD74",  "EGR1", "CLEC4E" )
+pdf("/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Human_integrated_selMac_dotplot_selMarkers_03_11_2023.pdf", width=10, height=3.5)
+
+plt_dot<- DotPlot(newReclustered_Mac, features=MAC_genes_ord, scale = T, idents=c("Res",  "Foamy", "IFN/Inflam"))+
+  RotatedAxis()+scale_color_viridis() +
+  scale_size(range = c(2, 7)) + xlab("") + ylab("") +
+  scale_y_discrete(labels=c("Reslike" = "Res", "Inflam" = "Inflam",
+                            "IFNIC" = "IFN", "Foamy" = "Foamy")) +
+  theme(legend.position="top",legend.key.size = unit(1, 'cm'), #change legend key size
+        legend.key.height = unit(0.5, 'cm'), #change legend key height
+        legend.key.width = unit(1.2, 'cm'), #change legend key width
+        axis.text.x = element_text(size=12, face = "italic"),
+        axis.text.y = element_text(size=12,face = "bold")
+        )
+plt_dot
+dev.off()
+
+pdf("/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Human_integrated_selMac_dotplot_selMarkers_C3_18_12_2023.pdf", width=10, height=3.5)
+plt_dot<- DotPlot(newReclustered_Mac, features=MAC_genes_ord, scale = T, idents=c("Res",  "Foamy",  "IFN/Inflam"))+
+  RotatedAxis()+scale_color_viridis() +
+  scale_size(range = c(2, 7)) + xlab("") + ylab("") +
+  scale_y_discrete(labels=c("Res" = "Res", "Foamy" = "Foamy", "IFN/Inflam" = "IFN/Inflam")) +
+  theme(legend.position="top",legend.key.size = unit(1, 'cm'), #change legend key size
+        legend.key.height = unit(0.5, 'cm'), #change legend key height
+        legend.key.width = unit(1.2, 'cm'), #change legend key width
+        axis.text.x = element_text(size=12, face = "italic"),
+        axis.text.y = element_text(size=12,face = "bold")
+        )
+plt_dot
+dev.off()
+```
+Now apply the genes from Res-like to perform the GO pathway analysis using enrichR.
+
+```{r, select markers to perform pathways}
+DefaultAssay(object =newReclustered_Mac) <- "RNA"
+test <- FindAllMarkers(newReclustered_Mac,  only.pos = T)
+Reslike_only <- test[test$cluster=="Reslike", "gene"]
+Inflam_only  <- test[test$cluster=="Inflam", "gene"]
+IFNIC_only   <- test[test$cluster=="IFNIC", "gene"]
+Foamy_only   <- test[test$cluster=="Foamy", "gene"]
+library(enrichR)
+
+dbs <- c("GO_Biological_Process_2021")
+enrichedRes <- enrichr(Reslike_only, dbs)
+enrichedInf <- enrichr(Inflam_only, dbs)
+enrichedIFI <- enrichr(IFNIC_only, dbs)
+enrichedFoa <- enrichr(Foamy_only, dbs)
+
+enrichedRes <- enrichedRes[["GO_Biological_Process_2021"]]
+enrichedRes <- subset(enrichedRes, Adjusted.P.value < 0.05)
+
+enrichedInf <- enrichedInf[["GO_Biological_Process_2021"]]
+enrichedInf <- subset(enrichedInf, Adjusted.P.value < 0.05)
+
+enrichedIFI <- enrichedIFI[["GO_Biological_Process_2021"]]
+enrichedIFI <- subset(enrichedIFI, Adjusted.P.value < 0.05)
+
+enrichedFoa <- enrichedFoa[["GO_Biological_Process_2021"]]
+enrichedFoa <- subset(enrichedFoa, Adjusted.P.value < 0.05)
+
+GOAll    <- list(enrichedRes$Term, enrichedInf$Term, enrichedIFI$Term, enrichedFoa$Term)
+GOcommon <- Reduce(intersect, GOAll)
+
+ResUnique  <- Reduce(setdiff, GOAll)
+InfUnique  <- Reduce(setdiff, list(enrichedInf$Term, enrichedRes$Term, enrichedIFI$Term, enrichedFoa$Term))
+IFNUnique  <- Reduce(setdiff, list(enrichedIFI$Term, enrichedInf$Term, enrichedRes$Term, enrichedFoa$Term))
+FoaUnique  <- Reduce(setdiff, list(enrichedFoa$Term, enrichedIFI$Term, enrichedInf$Term, enrichedRes$Term))
+
+write.xlsx(enrichedRes, file = "Macphage_subGO_BiologicalProcess_summary.xlsx", append = F, sheetName = "Reslike BP")
+write.xlsx(enrichedInf, file = "Macphage_subGO_BiologicalProcess_summary.xlsx", append = T, sheetName = "Inflammation BP")
+write.xlsx(enrichedIFI, file = "Macphage_subGO_BiologicalProcess_summary.xlsx", append = T, sheetName = "IFINC BP")
+write.xlsx(enrichedFoa, file = "Macphage_subGO_BiologicalProcess_summary.xlsx", append = T, sheetName = "Foamy BP")
+write.xlsx(GOcommon, file = "Macphage_subGO_BiologicalProcess_summary.xlsx", append = T, sheetName = "Common BP")
+
+```
+Test the Reslike NRP1 high against the NRP1 low, 
+```{r}
+NRP1_markers <- FindMarkers(newReclustered_Mac, ident.1= "Reslike", ident.2=c("Inflam", "Foamy", "IFNIC"), only.pos = T)
+NRP1_GO <- enrichr(rownames(NRP1_markers), dbs)
+NRP1_GO <- NRP1_GO[["GO_Biological_Process_2021"]]
+NRP1_GO <- subset(NRP1_GO, Adjusted.P.value < 0.05)
+write.xlsx(NRP1_GO, file = "Macphage_subGO_BiologicalProcess_summary.xlsx", append = T, sheetName = "NRP1_highvslow GO")
+```
+In order to select the interesting pathways for NRP1high vs low, we tried to overlap the RNASeq from our data pathways and see if any common ones existing.
+
+
+```{r, called the RNASeq biological pathways and overlap}
+RNASeq_BPs <- read.csv("/Users/xz289/Documents/Minoru/Project_mt709_0001/Figures_Tables/Macrophage/GoPathway/Mac_Merge_enrichGO_BP16_CC14_MF2_16_Dec_2021.csv", header = T)
+RNASeq_BPs$Term <- paste0(RNASeq_BPs$Description, " (", RNASeq_BPs$ID, ")")
+NRP1_GO_overR   <- NRP1_GO[NRP1_GO$Term%in%RNASeq_BPs$Term[RNASeq_BPs$ONTOLOGY=="BP"],]
+```
+There is no overlap terms. Try to use clusterProfiler and to check the enriched terms,
+
+```{r, clusterProfiler for Human NRP1 high vs low, Biological process, we only use the positive DEGs}
+library(clusterProfiler)
+load("/Users/xz289/Documents/Minoru/Project_mt709_0001/Data/References_Data/Oncology_Human/Ensembl_GRCh38.p13_entrezID_ensembID_exterName.RData")
+GODatasort_fn <- function(dinput, ensE){
+  dinput$external_gene_name <- rownames(dinput)
+  dinput_mer <- merge(dinput, ensE, by = "external_gene_name")
+  goinput <- dinput_mer[,c("entrezgene_id", "ensembl_gene_id", "external_gene_name", "avg_log2FC", "p_val_adj")]
+  colnames(goinput) <- c("ENTREZID", "ENSEMBL", "SYMBOL", "L2FC", "Padj")
+  goinput
+}
+NRP1_godata <- GODatasort_fn(NRP1_markers_new, ensEMBL2idH.GO)
+## a) applied padj < 0.05 and regardless the foldchange, the min log2FoldChange is 0.25, which equals to 1.189 fold change
+gene <- NRP1_godata[NRP1_godata$Padj<0.05, "SYMBOL"] 
+## 1332/2537(merge with different ENSEMBLID, 2800, From the wilcox test, we had 2591)
+## final identified by clusterprofiler is 1253/2379
+NRP1_ego <- enrichGO(gene          = gene,
+                universe      = NRP1_godata$SYMBOL,
+                OrgDb         = org.Hs.eg.db,
+                keyType = "SYMBOL",
+                ont           = "BP",
+                pAdjustMethod = "BH",
+                pvalueCutoff  = 0.05,
+                qvalueCutoff  = 0.05,
+                readable      = TRUE)
+head(NRP1_ego)
+
+## a) applied padj < 0.05 and the foldchange>=1,
+gene1 <- NRP1_godata[NRP1_godata$Padj<0.05 & NRP1_godata$L2FC>=1, "SYMBOL"] 
+NRP1_ego1 <- enrichGO(gene          = gene1,
+                universe      = NRP1_godata$SYMBOL,
+                OrgDb         = org.Hs.eg.db,
+                keyType = "SYMBOL",
+                ont           = "BP",
+                pAdjustMethod = "BH",
+                pvalueCutoff  = 0.05,
+                qvalueCutoff  = 0.05,
+                readable      = TRUE)
+head(NRP1_ego1)
+
+xlsx::write.xlsx(as.data.frame(NRP1_ego), file = "/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Fig4f-NRP1_hivslow_BP_ClusterProfiler_06112023.xlsx", sheetName = "OnlyPadj", append = F)
+xlsx::write.xlsx(as.data.frame(NRP1_ego1), file = "/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Fig4f-NRP1_hivslow_BP_ClusterProfiler_06112023.xlsx", sheetName = "Padj&L2FC", append = T)
+save(NRP1_godata, NRP1_markers_new, NRP1_ego, NRP1_ego1, file = "/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Fig4f-NRP1_hivslow_BP_ClusterProfiler_06112023.RData")
+```
+
+```{r, generate the pathway plot for selected. 09/02/2023}
+selBPs <- c("receptor-mediated endocytosis (GO:0006898)", "complement activation, classical pathway (GO:0006958)",
+            "negative regulation of leukocyte apoptotic process (GO:2000107)",
+            "transmembrane receptor protein tyrosine kinase signaling pathway (GO:0007169)",
+            "positive regulation of leukocyte chemotaxis (GO:0002690)", "platelet degranulation (GO:0002576)",
+            "regulation of cell migration (GO:0030334)", "regulation of actin cytoskeleton reorganization (GO:2000249)",
+            "endothelial tube morphogenesis (GO:0061154)", "axon guidance (GO:0007411)", 
+            "positive regulation of smooth muscle cell migration (GO:0014911)")
+selBPs.1 <- c("receptor-mediated endocytosis", "complement activation, \nclassical pathway",
+            "negative regulation of \nleukocyte apoptotic process",
+            "transmembrane receptor protein \ntyrosine kinase signaling pathway",
+            "positive regulation of \nleukocyte chemotaxis", "platelet degranulation",
+            "regulation of cell migration ", "regulation of actin \ncytoskeleton reorganization",
+            "endothelial tube morphogenesis", "axon guidance", 
+            "positive regulation of \nsmooth muscle cell migration")
+BPplt_dat <- NRP1_GO[NRP1_GO$Term%in%selBPs,]
+BPplt_dat$Description <-selBPs.1
+BPplt_dat$Count <- unlist(lapply(BPplt_dat$Overlap, function(x) strsplit(x, split="/")[[1]][1]))
+
+message("+----- Figure4f: Human NRP1high vs NRP1low selected GO pathways barplot-------------------------+")
+
+pdf("/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Selcted_NRP1_highvslow_Barplot_N.pdf", width= 10, height = 6.5, onefile = T)
+BPplt <- ggplot(BPplt_dat, aes(x=reorder(Description, -Adjusted.P.value), 
+                               y=Count, color=Adjusted.P.value, fill=Adjusted.P.value)) + 
+          geom_bar(stat="identity", aes(alpha = -Adjusted.P.value), color="white")+
+          coord_flip()+
+          scale_fill_gradient(low="darkred",high="tomato1") +
+          ylab("Gene Counts") +
+          xlab("") +
+          theme(axis.text.x = element_text(angle = 0, hjust = 1, size=18, face= "bold"),
+                axis.title.x = element_text(size=20, face= "bold"),
+                axis.title.y = element_text(size=20, face= "bold"),
+                axis.text.y = element_text(size=14, face="bold"),
+                legend.title = element_text(size = 14, face="bold"), 
+                legend.text = element_text(size = 14, face="bold")) +
+          theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
+                panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
+                panel.background = element_rect(fill = "white", colour = NA)) 
+BPplt
+dev.off()
+
+tiff("/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Selcted_NRP1_highvslow_Barplot.tiff", width = 10, height = 6.5, units = 'in', res = 300, compression = 'lzw')
+BPplt # Make plot
+dev.off()
+
+```
+Perform the HFDvsCtrl DEGs with different macrophage subtypes, especially in Res/Adv Macrophage which is relating to NRP1.
+
+```{r}
+newReclustered_Mac@meta.data$NewIdents <- paste0(Idents(newReclustered_Mac), "_",newReclustered_Mac@meta.data$Treatment)
+DefaultAssay(newReclustered_Mac) <- "RNA"
+Idents(newReclustered_Mac) <- newReclustered_Mac@meta.data$NewIdents
+
+detest_advr <- FindMarkers(newReclustered_Mac, assay = "RNA", ident.1 = "Reslike_dis", ident.2 = "Reslike_hea", verbose = FALSE, logfc.threshold = 0.00)
+detest_infr <- FindMarkers(newReclustered_Mac, assay = "RNA", ident.1 = "Inflam_dis", ident.2 = "Inflam_hea", verbose = FALSE, logfc.threshold = 0.00)
+detest_IFNr <- FindMarkers(newReclustered_Mac, assay = "RNA", ident.1 = "IFNIC_dis", ident.2 = "IFNIC_hea", verbose = FALSE, logfc.threshold = 0.00)
+detest_Tremr <- FindMarkers(newReclustered_Mac, assay = "RNA", ident.1 = "Foamy_dis", ident.2 = "Foamy_hea", verbose = FALSE, logfc.threshold = 0.00)
+library("DT")
+DT::datatable(detest_advr)
+write.xlsx(detest_advr, file = "/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Human_Mac_AtherovsHealthy_DEGs_Jun_2023.xlsx", append = F, sheetName = "Adv_Reslike")
+write.xlsx(detest_infr, file = "/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Human_Mac_AtherovsHealthy_DEGs_Jun_2023.xlsx", append = T, sheetName = "Inflam")
+write.xlsx(detest_IFNr, file = "/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Human_Mac_AtherovsHealthy_DEGs_Jun_2023.xlsx", append = T, sheetName = "IFNIC")
+write.xlsx(detest_Tremr, file = "/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Human_Mac_AtherovsHealthy_DEGs_Jun_2023.xlsx", append = T, sheetName = "Trem2_Foamy")
+
+```
+
+Thought it will also be good to present the celltype changes between Healthy and HFD. Stacked Barplot will be generated.
+
+```{r}
+newReclustered_Mac@meta.data$NewIdents <- Idents(newReclustered_Mac)
+barplt_dat <- as.data.frame(table(newReclustered_Mac@meta.data$NewIdents, newReclustered_Mac@meta.data$Treatment))
+barplt_dat$Perc <- c(barplt_dat$Freq[1:5]/sum(barplt_dat$Freq[1:5])*100, 
+                     barplt_dat$Freq[6:10]/sum(barplt_dat$Freq[6:10])*100)
+colnames(barplt_dat) <- c("CellType", "Treatment", "Freq", "Proportion")
+barplt_dat$Treatment <- ifelse(barplt_dat$Treatment=="hea", "Health", "Athero")
+barplt_dat$Treatment <- factor(barplt_dat$Treatment, levels = c("Health", "Athero"))
+barplt_dat$CellType <- factor(barplt_dat$CellType, levels = c("Reslike", "Inflam", "IFNIC", "Foamy", "NonMac"))
+pdf("/Users/xz289/Documents/Minoru/Seurat_v3/Athero_human/Figxx-Mac_Proportion_HFDvsCtrl_StackedBar_06112023.pdf")
+barplt <- ggplot(barplt_dat, aes(fill=CellType, y=Proportion, x=Treatment)) + 
+    geom_bar(position="fill", stat="identity") +
+    scale_fill_manual(values=c("darkred",  "darkgray",  "gray85", "darkorchid","cyan")) +
+  theme(panel.background = element_blank()) +
+  theme(axis.line = element_line(colour = "black"))
+print(barplt)
+dev.off()
+  
+```
+Do we need to perform GO analysis for different subtype of Macrophage between HFDvsCtrl?
+
+## Finished editing on 06112023
