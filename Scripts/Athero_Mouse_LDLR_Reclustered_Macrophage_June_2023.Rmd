@@ -95,7 +95,7 @@ save(AtheroUpdate.integrated, file="/Users/xz289/Documents/Minoru/Seurat_v3/Athe
 
 ```
 
-
+Reviewed after comments back, using python scVI reintegrated and select the subset of macrophage, 
 ```{r}
 load("/Users/xz289/Documents/Minoru/Seurat_v3/Athero_mouse/Athero_mouse_LDLR_new/AtheroUpdate.integrated.Robj")
 mygenes <- rownames(GetAssay(AtheroUpdate.integrated))
@@ -109,7 +109,8 @@ AtheroUpdate.integrated <- RunUMAP(AtheroUpdate.integrated, dims = 1:30)
 ```
 Find clusters and using "clustree" to decide the clusters with different resolutions.
 ```{r, fig.width = 6, fig.height = 8}
-AtheroUpdate.integrated  <- FindNeighbors(AtheroUpdate.integrated, dims = 1:30)
+#AtheroUpdate.integrated  <- FindNeighbors(AtheroUpdate.integrated, dims = 1:30)
+AtheroUpdate.integrated  <- FindNeighbors(AtheroUpdate.integrated, dims = 1:30, reduction = "integrated.scvi")
 AtheroUpdate.integrated  <- FindClusters(AtheroUpdate.integrated, resolution = 0)
 for(res in c(0.3,0.4,0.5,0.6,0.7,0.8,0.9,1))
 {
@@ -135,7 +136,8 @@ UMAPPlot(AtheroUpdate.integrated, label=T)
 ```
 
 ```{r }
-AtheroUpdate.integrated[["CCA_Clusters_03"]] <- Idents(object = AtheroUpdate.integrated)
+#AtheroUpdate.integrated[["CCA_Clusters_03"]] <- Idents(object = AtheroUpdate.integrated)
+AtheroUpdate.integrated[["scvi_Clusters_03"]] <- Idents(object = AtheroUpdate.integrated)
 ```
 
 
@@ -160,11 +162,13 @@ load(file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_mouse/Athero_mouse_LDL
 ```
 
 ```{r}
-AtheroUpdate_CCA_Average <- AverageExpression(AtheroUpdate.integrated, return.seurat = T)
+#AtheroUpdate_CCA_Average <- AverageExpression(AtheroUpdate.integrated, return.seurat = T)
+AtheroUpdate_scvi_Average <- AverageExpression(AtheroUpdate.integrated, return.seurat = T)
 ```
 
 ```{r}
-save(AtheroUpdate_CCA_Average,file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_mouse/Athero_mouse_LDLR_new/AtheroUpdate_CCA_Average_res03.Robj")
+#save(AtheroUpdate_CCA_Average,file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_mouse/Athero_mouse_LDLR_new/AtheroUpdate_CCA_Average_res03.Robj")
+#save(AtheroUpdate_scvi_Average,file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_mouse/Athero_mouse_LDLR_new/AtheroUpdate_scvi_Average_res03.Robj")
 
 ```
 
@@ -174,8 +178,8 @@ Markers <- AtheroUpdate.integrated.markers %>% filter(pct.1 > 0.3)
 top20= AtheroUpdate.integrated.markers%>% group_by(cluster) %>% top_n(n = 20, wt = avg_log2FC)
 
 top5 <- Markers %>% group_by(cluster) %>% top_n(n = 5, wt = avg_log2FC)
-heat<- DoHeatmap(AtheroUpdate_CCA_Average, features = top5$gene, group.bar = T, size = 4, angle = 90,draw.lines=F, raster = F) + NoLegend()
-
+#heat<- DoHeatmap(AtheroUpdate_CCA_Average, features = top5$gene, group.bar = T, size = 4, angle = 90,draw.lines=F, raster = F) + NoLegend()
+heat<- DoHeatmap(AtheroUpdate_scvi_Average, features = top5$gene, group.bar = T, size = 4, angle = 90,draw.lines=F, raster = F) + NoLegend()
 heat
 ```
 
@@ -243,7 +247,8 @@ FeaturePlot(AtheroUpdate.integrated, features=c("IEG_Score1"), min.cutoff = "q5"
 
 ```{r}
 head(AtheroUpdate.integrated@meta.data)
-Idents(AtheroUpdate.integrated)=AtheroUpdate.integrated[["CCA_Clusters_03"]]
+#Idents(AtheroUpdate.integrated)=AtheroUpdate.integrated[["CCA_Clusters_03"]]
+Idents(AtheroUpdate.integrated)=AtheroUpdate.integrated[["scvi_Clusters_03"]]
 levels(AtheroUpdate.integrated)
 save(AtheroUpdate.integrated,file="/Users/xz289/Documents/Minoru/Seurat_v3/Athero_mouse/Athero_mouse_LDLR_new/AtheroUpdate.integrated.res03.Robj")
 
@@ -356,10 +361,11 @@ MAC.conserve.markers3 <- FindConservedMarkers(MAC_Reclustered,
                      ident.1 = 3,
                      grouping.var = "Treatment",
                      only.pos = TRUE)
-MAC_Reclustered_CCA_Average <- AverageExpression(MAC_Reclustered, return.seurat = T)
+#MAC_Reclustered_CCA_Average <- AverageExpression(MAC_Reclustered, return.seurat = T)
+MAC_Reclustered_scvi_Average <- AverageExpression(MAC_Reclustered, return.seurat = T)
 MAC.top5 = MAC.integrated.markers%>% group_by(cluster) %>% top_n(n = 5, wt = avg_log2FC)
-heatmac <- DoHeatmap(MAC_Reclustered_CCA_Average, features = MAC.top5$gene, group.bar = T, size = 4, angle = 90,draw.lines=F, raster = F) + NoLegend()
-
+#heatmac <- DoHeatmap(MAC_Reclustered_CCA_Average, features = MAC.top5$gene, group.bar = T, size = 4, angle = 90,draw.lines=F, raster = F) + NoLegend()
+heatmac <- DoHeatmap(MAC_Reclustered_scvi_Average, features = MAC.top5$gene, group.bar = T, size = 4, angle = 90,draw.lines=F, raster = F) + NoLegend()
 heatmac
 
 ```
@@ -425,13 +431,15 @@ message("+-------Add the cluster celltype annotations-------+")
 Idents(MAC_Reclustered) <- MAC_Reclustered[["seurat_clusters"]]
 names(new.cluster.idsm) <- levels(MAC_Reclustered)
 MAC_Reclustered <- RenameIdents(MAC_Reclustered, new.cluster.idsm)
-MAC_Reclustered[["Global_CCA_Annotation"]] <- Idents(object = MAC_Reclustered)
+#MAC_Reclustered[["Global_CCA_Annotation"]] <- Idents(object = MAC_Reclustered)
+MAC_Reclustered[["Global_scvi_Annotation"]] <- Idents(object = MAC_Reclustered)
 
 ## Fine annotation 6 subcluster of macrophage
 Idents(MAC_Reclustered) <- MAC_Reclustered[["seurat_clusters"]]
 names(new.cluster.ids) <- levels(MAC_Reclustered)
 MAC_Reclustered <- RenameIdents(MAC_Reclustered, new.cluster.ids)
-MAC_Reclustered[["Fine_CCA_Annotation"]] <- Idents(object = MAC_Reclustered)
+#MAC_Reclustered[["Fine_CCA_Annotation"]] <- Idents(object = MAC_Reclustered)
+MAC_Reclustered[["Fine_scvi_Annotation"]] <- Idents(object = MAC_Reclustered)
 ```
 Generate UMAP plot and highlight the Mac_AIR clusters in William's paper.
 
@@ -615,12 +623,16 @@ testall@meta.data$Condition <- ifelse(testall@meta.data$Protocol=="Cochain_Chow"
                                       testall@meta.data$Protocol=="Williams_C57", "Chow", "HFD")
 ## 2) assign different Conditons with cell type specific
 ## global condition
-testall@meta.data$GlobalCondition <- paste0(testall@meta.data$Global_CCA_Annotation, "_",
+#testall@meta.data$GlobalCondition <- paste0(testall@meta.data$Global_CCA_Annotation, "_",
+                                            testall@meta.data$Condition)
+#testall@meta.data$GlobalCondition <- paste0(testall@meta.data$Global_scvi_Annotation, "_",
                                             testall@meta.data$Condition)
 table(testall@meta.data$GlobalCondition)
 
 ## globalF condition (split inflam and IFNIC)
-testall@meta.data$GlobalFCondition <- paste0(testall@meta.data$GlobalF_CCA_Annotation, "_",
+#testall@meta.data$GlobalFCondition <- paste0(testall@meta.data$GlobalF_CCA_Annotation, "_",
+                                            testall@meta.data$Condition)
+testall@meta.data$GlobalFCondition <- paste0(testall@meta.data$GlobalF_scvi_Annotation, "_",
                                             testall@meta.data$Condition)
 table(testall@meta.data$GlobalFCondition)
 
@@ -632,10 +644,12 @@ timeCond <- ifelse(testall@meta.data$Protocol=="Williams_21days_HFD", "wk3_HFD",
 table(timeCond)
 testall@meta.data$TimeCond <- timeCond
 
-testall@meta.data$NewTimeCond <- paste0(testall@meta.data$Global_CCA_Annotation, "_",timeCond)
+#testall@meta.data$NewTimeCond <- paste0(testall@meta.data$Global_CCA_Annotation, "_",timeCond)
+testall@meta.data$NewTimeCond <- paste0(testall@meta.data$Global_scvi_Annotation, "_",timeCond)
 table(testall@meta.data$NewTimeCond)
 
-testall@meta.data$NewFTimeCond <- paste0(testall@meta.data$GlobalF_CCA_Annotation, "_",timeCond)
+#testall@meta.data$NewFTimeCond <- paste0(testall@meta.data$GlobalF_CCA_Annotation, "_",timeCond)
+testall@meta.data$NewFTimeCond <- paste0(testall@meta.data$GlobalF_scvi_Annotation, "_",timeCond)
 table(testall@meta.data$NewFTimeCond)
 
 MAC_Reclustered <- testall
@@ -1022,7 +1036,7 @@ hplt_res_wks <- ComplexHeatmap:: Heatmap(as.matrix(allhptord_selplt[,-4]), na_co
                            row_title_rot = 90, row_gap = unit(3, "mm"), 
                            column_gap = unit(2, "mm"))
 
-message("+----- Addition Figurexx for HFDvsCtrl across time heatmap-----------------------------+")
+message("+----- Addition Figure7a for HFDvsCtrl across time heatmap-----------------------------+")
 pdf("/Users/xz289/Documents/Minoru/Seurat_v3/Athero_mouse/Athero_mouse_LDLR_new/Heatmap_DEGs_MAST_GlobalC3_acrossTime_noall_selMarkers_Dec_2023.pdf", height = 7, width = 5)
 hplt_res_wks
 dev.off()
@@ -1511,10 +1525,5 @@ plot_grid(barplt_s1, barplt_s2, ncol=2, rel_widths = c(0.9, 1.5))
 dev.off()
 
 ```
-Double check Nrp1 high/low clusters,
-```{r}
-Idents(MAC_Reclustered) <- "integrated_snn_res.1.2"
-test <- AverageExpression(object = MAC_Reclustered, group.by = c('ident'))$RNA
 
-```
 
