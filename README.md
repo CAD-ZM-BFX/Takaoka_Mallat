@@ -73,16 +73,13 @@ Paired-end (PE50), reverse stranded sequencing for Nrp1 WT versus Nrp1 KO perito
 ## RNASeq Analysis <br>
 
 ### Step 1: Sample Information <br>
- 1) **R script**
 
-  SampleSheet_Generating-Step1.R [[R](Scripts/RNA_Seq/SampleSheet_Generating-01.R)] <br>
-
- 2) ** Output sample Tables with all available information **
-
-  a) **Macrophage**: <br>
-    I) First Batch: Macrophage_FirstBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_SampleTable.csv)] <br>
-    II) First Batch: Macrophage_SecondBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_SampleTable.csv)] <br>
-  b) **Nrp1**:  Nrp1-nextflow_SampleTable.csv[[CSV](Data/Nrp1_SampleTable_cWD.csv)] <br>
+  1) **R script**  SampleSheet_Generating-Step1.R [[R](Scripts/RNA_Seq/SampleSheet_Generating-01.R)] <br>
+  2) ** Output sample Tables with all available information **
+      a) **Macrophage**: <br>
+          I) First Batch: Macrophage_FirstBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_SampleTable.csv)] <br>
+          II) First Batch: Macrophage_SecondBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_SampleTable.csv)] <br>
+      b) **Nrp1**:  Nrp1-nextflow_SampleTable.csv[[CSV](Data/Nrp1_SampleTable_cWD.csv)] <br>
 
 
 ### Step 2: QC and Alignment pipeline
@@ -94,17 +91,15 @@ Paired-end (PE50), reverse stranded sequencing for Nrp1 WT versus Nrp1 KO perito
    b) Macrophage_SecondBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_Nextflow_SampleTable.csv)] <br>
    c) Nrp1_Nextflow_SampleTable.csv[[CSV](Data/Nrp1_Nextflow_SampleTable_cWD.csv)] <br>
 
-2) **Bash script**
-
-Macrophage_Nrp1_Nextflow_Run-02.sh [[bash](Scripts/RNA_Seq/Macrophage_NRP1_Nextflow_Run-02.sh)] <br>
+2) **Bash script:** Macrophage_Nrp1_Nextflow_Run-02.sh [[bash](Scripts/RNA_Seq/Macrophage_NRP1_Nextflow_Run-02.sh)] <br>
 
 
 ### Step 3: RNASeq Analysis (R v4.2.1)
 
 Analysis R scripts are given as below:
 
-     Macrophage_DESeq_GO_Analysis-03.R[[R](Scripts/RNA_Seq/Macrophage_DESeq_GO_Analysis-03.R)] <br>
-     Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-04.R[[R](Scripts/RNA_Seq/Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-04.R)] <br>
+     1) Macrophage_DESeq_GO_Analysis-03.R[[R](Scripts/RNA_Seq/Macrophage_DESeq_GO_Analysis-03.R)] <br>
+     2) Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-04.R[[R](Scripts/RNA_Seq/Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-04.R)] <br>
 
 #### Step 3.1: Differential Analysis
 
@@ -136,7 +131,7 @@ see **Supplementary Table S5** and **Extended Figure6b**.
 ## Step 3.4: GWAS Analysis
 * GWAS list relating to CVD (atherosclerosis) from EBI GWAS human, see
 **Supplementary Table S24** and also joint the table from
-supplementary table 13 of **Tcheandjieu et al.**<sup> 24 </sup>.
+supplementary table 13 of **Tcheandjieu et al.**.
 * Human and Mouse GWAS list genes orthology table **Supplementary Table S25**.
 * Overlap with iWD vs cWD sig/refined non-sig DEGs, barplot presented in
 **Figure 4a** and **Supplementary Table S6**.
@@ -149,9 +144,9 @@ macrophage subtypes, see **Supplementary Table S7** and **Figure 4b**.
  (ASYM, n = 14) and *symptomatic* (SYM, n = 9). Volcano plot (**Fig 4c**) Highlight
  the DEGs which overlapped with (**Supplementary Table S7&8**) <br>
 
-  a) Macrophage sig DEGs (iWD vs cWD) <br>
-  b) CVD relating GWAS genes <br>
-  c) Integrating public mouse subtypes of Macrophge genes. <br>
+    a) Macrophage sig DEGs (iWD vs cWD) <br>
+    b) CVD relating GWAS genes <br>
+    c) Integrating public mouse subtypes of Macrophge genes. <br>
 
  2) Krishna G. Aragam et al (2022) Supplementary Table 31: Causal CVD GWAS pathway
  Analysis, see **Extended Fig 9** with selected pathways and corresponding genes
