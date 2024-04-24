@@ -1,4 +1,4 @@
-# Takaoka_Mallat
+
 # Early intermittent hyperlipidaemia alters tissue macrophages to boost atherosclerosis
 Minoru Takaoka<sup>1</sup>, Xiaohui Zhao<sup>1\*</sup>, Hwee Ying Lim<sup>2,3\*</sup>, Costan G. Magnussen<sup>4,5,6\*</sup>,Owen Ang<sup>2,3</sup>,
 Nadine Suffee<sup>7</sup>, Patricia R. Schrank<sup>8</sup>, Wei Siong ONG<sup>2,3</sup>, Dimitrios Tsiantoulas<sup>1,9</sup>, Felix
