@@ -84,7 +84,7 @@ Paired-end (PE50), reverse stranded sequencing for Nrp1 WT versus Nrp1 KO perito
 
 ### Step 2: QC and Alignment pipeline
 
-                       (nextflow version 21.05.0, nf-core/rnaseq version 3.2) <br>
+                       (nextflow version 21.05.0, nf-core/rnaseq version 3.2)
 1) **Input spreadsheet**
 
    a) Macrophage_FirstBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_Nextflow_SampleTable.csv)] <br>
@@ -98,8 +98,8 @@ Paired-end (PE50), reverse stranded sequencing for Nrp1 WT versus Nrp1 KO perito
 
 Analysis R scripts are given as below:
 
-     1) Macrophage_DESeq_GO_Analysis-03.R[[R](Scripts/RNA_Seq/Macrophage_DESeq_GO_Analysis-03.R)] <br>
-     2) Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-04.R[[R](Scripts/RNA_Seq/Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-04.R)] <br>
+ * Macrophage_DESeq_GO_Analysis-03.R[[R](Scripts/RNA_Seq/Macrophage_DESeq_GO_Analysis-03.R)] <br>
+ * Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-04.R[[R](Scripts/RNA_Seq/Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-04.R)] <br>
 
 #### Step 3.1: Differential Analysis
 
