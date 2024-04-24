@@ -48,13 +48,13 @@ Illumina HiSeq 4000 platform, single-end reads (SE50), 2 Runs
 * RNASeq data for cWD Nrp1 KO: EMBL-EBI ArrayExpress <br>
   **E-MTAB-12761**(https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-12761/)<br>
 Illumina NovaSeq6000 platform, paired-end reads (PE50)
-* single Cell RNASeq data: public data, please check the supplementary Tables (STable 17, STable 18).
-
-## Corresponding Data/Tables are given below
+* single Cell RNASeq data: public data, please check the Supplementary Tables
+(S23, Mouse; S26 Human).
+* Processed Data/Tables are given
 Supplementary Tables [[XLSX](./Figures_Tables/SupplementaryTable-446096_1_data_set_4306588_Dec_2023.xlsx)]
+** Here needs to update the new version **
 
-
-## RNASeq analysis Methods (Need to check, 23/04/2024)
+## Sequencing data analysis Methods (Need to check, 23/04/2024)
 
 RNA sequencing analyses. iWD and cWD for Ldlr−/− mice single end, unstranded sequencing was performed using SMART-Seq v4 plus nextera (Ultra Low Input RNA Kit (Takara)) with read lengths of 50bp. Raw fastq data have been deposited in ArrayExpress with accession number E-MTAB-12759 (https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-12759). There are two separate experiments for this study with iWD and cWD groups, each group has three independent pools per experiment, and each pool comprising 3 different mice. All raw data were merged and analysed together, with a total of 6 different pools for each group. Sample summary table is in Supplementary Table 13a. The QC, alignment and gene quantification analysis were run using nextflow (version 21.05.0.edge)<sup>38</sup> rnaseq pipeline with nf-core/rnaseq (version 3.2, https://nf-co.re/rnaseq)<sup>39</sup> with the option “--aligner star_salmon” and Ensembl reference genome with the annotation for mouse GRCm39. The alignment results are with a mean of 72% reads uniquely mapping and mean of 34M reads per sample (see Supplementary Table 13). Corresponding software/packages and versions are listed in Supplementary Table 14. All scripts, with details of software versions, expression raw count files and results are freely available from https://github.com/Takaoka_Mallat (DOI:xxxx).<br>
 
@@ -73,46 +73,56 @@ Paired-end (PE50), reverse stranded sequencing for Nrp1 WT versus Nrp1 KO perito
 ## RNASeq Analysis <br>
 
 ### Step 1: Sample Information <br>
+ 1) **R script**
 
- SampleSheet_Generating-Step1.R [[R](Scripts/RNA_Seq/SampleSheet_Generating-Step1.R)] <br>
+  SampleSheet_Generating-Step1.R [[R](Scripts/RNA_Seq/SampleSheet_Generating-01.R)] <br>
 
-  1) **Macrophage**: <br>
-    a) First Batch: Macrophage_FirstBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_SampleTable.csv)] <br>
-    b) First Batch: Macrophage_SecondBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_SampleTable.csv)] <br>
-  2) **Nrp1**:<br>
-      Nrp1-nextflow_SampleTable.csv[[CSV](Data/Nrp1_SampleTable_cWD.csv)] <br>
+ 2) ** Output sample Tables with all available information **
+
+  a) **Macrophage**: <br>
+    I) First Batch: Macrophage_FirstBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_SampleTable.csv)] <br>
+    II) First Batch: Macrophage_SecondBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_SampleTable.csv)] <br>
+  b) **Nrp1**:  Nrp1-nextflow_SampleTable.csv[[CSV](Data/Nrp1_SampleTable_cWD.csv)] <br>
 
 
 ### Step 2: QC and Alignment pipeline
-(nextflow version 21.05.0, nf-core/rnaseq version 3.2)
-**Step2** Macrophage_NRP1_Nextflow_Run-Step2.sh [[bash](Scripts/RNA_Seq/Macrophage_NRP1_Nextflow_Run-Step2.sh)] <br>
 
-Macrophage_FirstBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_Nextflow_SampleTable.csv)] <br>
-Macrophage_SecondBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_Nextflow_SampleTable.csv)] <br>
-Nrp1_Nextflow_SampleTable.csv[[CSV](Data/Nrp1_Nextflow_SampleTable_cWD.csv)] <br>
+                       (nextflow version 21.05.0, nf-core/rnaseq version 3.2) <br>
+1) **Input spreadsheet**
 
-### Step 3.1: Differential Analysis
-Using R (v4.2.1) with DESeq2 (v1.36.0) & Gene Ontology Analysis
+   a) Macrophage_FirstBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_Nextflow_SampleTable.csv)] <br>
+   b) Macrophage_SecondBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_Nextflow_SampleTable.csv)] <br>
+   c) Nrp1_Nextflow_SampleTable.csv[[CSV](Data/Nrp1_Nextflow_SampleTable_cWD.csv)] <br>
 
-The analysis code is <br>
+2) **Bash script**
 
-Macrophage_DESeq_GO_Analysis.R[[R](Scripts/RNA_Seq/Macrophage_DESeq_GO_Analysis-Step3.1.R)] <br>
-Nrp1_DESeq_GO_Analysis.R[[R](Scripts/RNA_Seq/Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-Step3.2.R)] <br>
+Macrophage_Nrp1_Nextflow_Run-02.sh [[bash](Scripts/RNA_Seq/Macrophage_NRP1_Nextflow_Run-02.sh)] <br>
 
-                 Design formula ~ condition
-* significant cut-off threshold is padj < 0.05 & abs(log2FoldChange) >= 1
+
+### Step 3: RNASeq Analysis (R v4.2.1)
+
+Analysis R scripts are given as below:
+
+     Macrophage_DESeq_GO_Analysis-03.R[[R](Scripts/RNA_Seq/Macrophage_DESeq_GO_Analysis-03.R)] <br>
+     Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-04.R[[R](Scripts/RNA_Seq/Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-04.R)] <br>
+
+#### Step 3.1: Differential Analysis
+
+* significant cut-off threshold is *padj < 0.05 & abs(log2FoldChange) >= 1*
 * DESeq2 analysis for iWD vs cWD (merge two batches, significant DEGs
   **Supplementary Table S1** and **Fig2b**)
 * DESeq2 analysis (Nrp1 KO vs WT for cWD, significant DEGs **Supplementary Table S12**)
 
 ### Step 3.2: Gene Ontology Analysis
+
 * Input data are the significant DEGs from DESeq analysis.
 * Using R package clusterProfiler (version 4.4.4), based on Biological Process mainly.
 * GeneOntology results are given in **Supplementary Table S2** and **Figure 2a**.
 * GeneOntology results for NRP1 KOvsWT are illustrated in both **Fig4h** and
   **Supplementary Table S13**.
 
-### Step 3.3: Transcription Factor (TF) binding motif enrichment analysis
+#### Step 3.3: Transcription Factor (TF) binding motif enrichment analysis
+
 * Significant DEGs (padj <= 0.05 & abs(log2FoldChange) >= 1) and
 non-significant (padj > 0.1 & abs(log2FoldChange) < 1) TFs binding motif analysis
 * R package Rcistarget (version 1.16.0) with motif rankings for  500 bp upstream
