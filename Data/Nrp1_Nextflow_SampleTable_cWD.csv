@@ -1,0 +1,13 @@
+sample,fastq_1,fastq_2,strandedness
+cWD_WT_REP1,SLX-22500.UDI0057rna.r1.fq.gz,SLX-22500.UDI0057rna.r2.fq.gz,reverse
+cWD_WT_REP2,SLX-22500.UDI0058rna.r1.fq.gz,SLX-22500.UDI0058rna.r2.fq.gz,reverse
+cWD_WT_REP3,SLX-22500.UDI0059rna.r1.fq.gz,SLX-22500.UDI0059rna.r2.fq.gz,reverse
+cWD_WT_REP4,SLX-22500.UDI0060rna.r1.fq.gz,SLX-22500.UDI0060rna.r2.fq.gz,reverse
+cWD_WT_REP5,SLX-22500.UDI0061rna.r1.fq.gz,SLX-22500.UDI0061rna.r2.fq.gz,reverse
+cWD_WT_REP6,SLX-22500.UDI0062rna.r1.fq.gz,SLX-22500.UDI0062rna.r2.fq.gz,reverse
+cWD_KO_REP1,SLX-22500.UDI0063rna.r1.fq.gz,SLX-22500.UDI0063rna.r2.fq.gz,reverse
+cWD_KO_REP2,SLX-22500.UDI0064rna.r1.fq.gz,SLX-22500.UDI0064rna.r2.fq.gz,reverse
+cWD_KO_REP3,SLX-22500.UDI0065rna.r1.fq.gz,SLX-22500.UDI0065rna.r2.fq.gz,reverse
+cWD_KO_REP4,SLX-22500.UDI0066rna.r1.fq.gz,SLX-22500.UDI0066rna.r2.fq.gz,reverse
+cWD_KO_REP5,SLX-22500.UDI0067rna.r1.fq.gz,SLX-22500.UDI0067rna.r2.fq.gz,reverse
+cWD_KO_REP6,SLX-22500.UDI0068rna.r1.fq.gz,SLX-22500.UDI0068rna.r2.fq.gz,reverse
