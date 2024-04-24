@@ -75,11 +75,11 @@ Paired-end (PE50), reverse stranded sequencing for Nrp1 WT versus Nrp1 KO perito
 ### Step 1: Sample Information <br>
 
   1) **R script**  SampleSheet_Generating-Step1.R [[R](Scripts/RNA_Seq/SampleSheet_Generating-01.R)] <br>
-  2) ** Output sample Tables with all available information **
-      a) **Macrophage**: <br>
+  2) **Output** sample Tables with all available information
+      * **Macrophage**: <br>
           I) First Batch: Macrophage_FirstBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_SampleTable.csv)] <br>
           II) First Batch: Macrophage_SecondBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_SampleTable.csv)] <br>
-      b) **Nrp1**:  Nrp1-nextflow_SampleTable.csv[[CSV](Data/Nrp1_SampleTable_cWD.csv)] <br>
+      * **Nrp1**:  Nrp1-nextflow_SampleTable.csv[[CSV](Data/Nrp1_SampleTable_cWD.csv)] <br>
 
 
 ### Step 2: QC and Alignment pipeline
