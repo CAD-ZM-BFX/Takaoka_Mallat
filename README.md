@@ -51,22 +51,22 @@ Illumina HiSeq 4000 platform, single-end reads (SE50), 2 Runs
 Illumina NovaSeq6000 platform, paired-end reads (PE50)
 
 * single Cell RNASeq data: public data, please check the Supplementary Tables
-(**Supplementary Tabble S23**, Mouse; **Supplementary Table S26** Human).
+(**Supplementary Table S23**, Mouse; **Supplementary Table S26** Human).
 
 * Processed Data/Tables are given
-Supplementary Tables [[XLSX](./Figures_Tables/Supplementary Tables-Takaoka et al-Nature 2023-03-04115-R2-Zhao.xlsx)]
-** Here needs to update the new version **
+Supplementary Tables [[XLSX](Figures_Tables/Supplementary Tables-Takaoka et al-Nature 2023-03-04115-R2-Zhao.xlsx)]
+
 
 
 ## RNASeq Analysis <br>
 
 ### Step 1: Sample Information <br>
 
-  1) **R script**  SampleSheet_Generating-Step1.R [[R](Scripts/RNA_Seq/SampleSheet_Generating-01.R)] <br>
-  2) **Output** sample Tables with all available information
+  1.1) **R script**  SampleSheet_Generating-Step1.R [[R](Scripts/RNA_Seq/SampleSheet_Generating-01.R)] <br>
+  1.2) **Output** sample Tables with all available information
       * **Macrophage**: <br>
           I) First Batch: Macrophage_FirstBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_SampleTable.csv)] <br>
-          II) First Batch: Macrophage_SecondBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_SampleTable.csv)] <br>
+          II) Second Batch: Macrophage_SecondBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_SampleTable.csv)] <br>
       * **Nrp1**:  Nrp1-nextflow_SampleTable.csv[[CSV](Data/Nrp1_SampleTable_cWD.csv)] <br>
 
 
@@ -74,22 +74,22 @@ Supplementary Tables [[XLSX](./Figures_Tables/Supplementary Tables-Takaoka et al
 
                        (nextflow version 21.05.0, nf-core/rnaseq version 3.2)
 
-1) Input spreadsheet <br>
+2.1) Input spreadsheet <br>
 
    a) Macrophage_FirstBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_Nextflow_SampleTable.csv)] <br>
    b) Macrophage_SecondBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_Nextflow_SampleTable.csv)] <br>
    c) Nrp1_Nextflow_SampleTable.csv[[CSV](Data/Nrp1_Nextflow_SampleTable_cWD.csv)] <br>
 
-2) Bash script: <br>
+2.2) Bash script: <br>
 
-    Macrophage_Nrp1_Nextflow_Run-02.sh [[bash](Scripts/RNA_Seq/Macrophage_NRP1_Nextflow_Run-02.sh)] <br>
+    Macrophage_Nrp1_Nextflow_Run-02.sh [[bash](Scripts/RNA_Seq/Macrophage_Nrp1_Nextflow_Run-02.sh)] <br>
 
-3) **Alignment summary**: <br>
+2.3) **Alignment summary**: <br>
 
-      3.1) Macrophage: **Supplementary Table S21a** <br>
-      3.2) Nrp1 KO vs WT cWD: **Supplementary Table S21b** <br>
+      2.3.1) Macrophage: **Supplementary Table S21a** <br>
+      2.3.2) Nrp1 KO vs WT cWD: **Supplementary Table S21b** <br>
 
-4) Software and versions in Nextflow pipeline: <br>
+2.4) Software and versions in Nextflow pipeline: <br>
 
     **Supplementary Table S22**
 
@@ -141,7 +141,7 @@ macrophage subtypes, see **Supplementary Table S7** and **Figure 4b**.
 
 ## Step 3.5: Public RNASeq Analysis
 
- 1) Fernandez(2019):Cohort 2 MC analyses on 23 patients stratified as *asymptomatic*
+ 3.5.1) Fernandez(2019):Cohort 2 MC analyses on 23 patients stratified as *asymptomatic*
  (ASYM, n = 14) and *symptomatic* (SYM, n = 9). Volcano plot (**Fig 4c**) Highlight
  the DEGs which overlapped with (**Supplementary Table S7&8**) <br>
 
@@ -149,7 +149,7 @@ macrophage subtypes, see **Supplementary Table S7** and **Figure 4b**.
     b) CVD relating GWAS genes <br>
     c) Integrating public mouse subtypes of Macrophge genes. <br>
 
- 2) Krishna G. Aragam et al (2022) Supplementary Table 31: Causal CVD GWAS pathway
+ 3.5.2) Krishna G. Aragam et al (2022) Supplementary Table 31: Causal CVD GWAS pathway
  Analysis, see **Extended Fig 9** with selected pathways and corresponding genes
  network plot.  <br>
 
@@ -194,8 +194,6 @@ paper Supplementary material.
 | ----------------------------- | --- |----|----|
 |Fig2a | [[PDF](Figures_Tables/Fig2a-MacMer_GOBP_sel_Barplot_Up_DW_Nov_2022.pdf)] |<IMG SRC="Figures_Tables/Fig2a-MacMer_GOBP_sel_Barplot_Up_DW_Nov_2022.pdf.png" width=800px>| Selected Biological Process pathways bar plot for iWD vs cWD.|
 |Fig2b | [[PDF](Figures_Tables/Fig2b-MacMer_VolcanoPlot_selmarkers_05_Jan_2023.pdf)] |<IMG SRC="Figures_Tables/Fig2b-MacMer_VolcanoPlot_selmarkers_05_Jan_2023.pdf.png" width=800px>|  Volcano plot for DEGs iWD vs cWD, highlight the MacAir and Reslike Macrophage markers.|
-|Extended Fig4a | [[PDF](Figures_Tables/Extended_Fig4a-TFs_sig_Nsig_NES_difference_boxplot_01112023_new2_noviolet.pdf)] |<IMG SRC="Figures_Tables/Extended_Fig4a-TFs_sig_Nsig_NES_difference_boxplot_01112023_new2_noviolet.png" width=800px>| Transcription factor analysis for DEGs and nonDEGs Normalised enrichment score (NES) difference boxplot.|
-|Extended Fig4b | [[PDF](Figures_Tables/Extended_Fig4b-Spic_selectedPathway_Barplot_Dec_2022.pdf)] |<IMG SRC="Figures_Tables/Extended_Fig4b-Spic_selectedPathway_Barplot_Dec_2022.pdf.png" width=800px>| TF "Spic" relating DEGs selected Biological process enriched pathways bar plot.|
 |Fig4a | [[PDF](Figures_Tables/Fig4a-GWAS_sig_Nsig_p01_l2fc1_BarPlot_Jan_2023.pdf)] |<IMG SRC="Figures_Tables/Fig4a-GWAS_sig_Nsig_p01_l2fc1_BarPlot_Jan_2023.pdf.png" width=800px>| Barplot for DEGs and nonDEGS overlap proportion with CAD relating GWAS data.|
 |Fig4b | [[PDF](Figures_Tables/Fig4b-MacMer_sigDEGs_overlapCelltype_gwas_piechart_group3_Jan_2022.pdf)] |<IMG SRC="Figures_Tables/Fig4b-MacMer_sigDEGs_overlapCelltype_gwas_piechart_group3_Jan_2022.pdf.png" width=800px>|  pie chart to show the proportion of the DEGs overlap with GWAS with the macrophage sub-types.|
 |Fig4c | [[PDF](Figures_Tables/Fig4c-Fernandez_2020_Human_SymAsym_VolcanoPlot_Jan_2023_gwas.pdf)] |<IMG SRC="Figures_Tables/Fig4c-Fernandez_2020_Human_SymAsym_VolcanoPlot_Jan_2023_gwas.pdf.png" width=800px>|  Volcano plot using Fernandez (2020) human data for SymvsAsym plaques data. |
@@ -203,6 +201,8 @@ paper Supplementary material.
 |Fig4e | [[PDF](Figures_Tables/Fig4e-scRNASeqHuman_integrated_selMac_dotplot_selMarkers_C3_18_12_2023.pdf)] |<IMG SRC="Figures_Tables/Fig4e-scRNASeqHuman_integrated_selMac_dotplot_selMarkers_C3_18_12_2023.png" width=800px>| Dotplot for selected markers of Human public atherosclerosis integrated scRNASeq data.|
 |Fig4f | [[PDF](Figures_Tables/Fig4f-Human_scRNASeq_Selcted_NRP1_highvslow_Barplot_N.pdf)] |<IMG SRC="Figures_Tables/Fig4f-Human_scRNASeq_Selcted_NRP1_highvslow_Barplot_N.pdf.png" width=800px>|  Selected Biological process Gene ontology pathways for human NRP1 high clusters vs NRP1 low clusters. |
 |Fig4h| [[PDF](Figures_Tables/Fig4h-Mouse_cWD_KOvsWT_Selcted_NRP1_highvslow_Barplot_N.pdf)] |<IMG SRC="Figures_Tables/Fig4h-Mouse_cWD_KOvsWT_Selcted_NRP1_highvslow_Barplot_N.pdf.png" width=800px>|  Selected Biological process Gene ontology pathways for mouse cWD NRP1 KOvsWT. |
+|Extended Fig4a | [[PDF](Figures_Tables/Extended_Fig4a-TFs_sig_Nsig_NES_difference_boxplot_01112023_new2_noviolet.pdf)] |<IMG SRC="Figures_Tables/Extended_Fig4a-TFs_sig_Nsig_NES_difference_boxplot_01112023_new2_noviolet.png" width=800px>| Transcription factor analysis for DEGs and nonDEGs Normalised enrichment score (NES) difference boxplot.|
+|Extended Fig4b | [[PDF](Figures_Tables/Extended_Fig4b-Spic_selectedPathway_Barplot_Dec_2022.pdf)] |<IMG SRC="Figures_Tables/Extended_Fig4b-Spic_selectedPathway_Barplot_Dec_2022.pdf.png" width=800px>| TF "Spic" relating DEGs selected Biological process enriched pathways bar plot.|
 |Extended Fig7a | [[PDF](Figures_Tables/Extended_Fig7a-Heatmap_DEGs_MAST_GlobalC3_acrossTime_noall_selMarkers_Dec_2023.pdf)] |<IMG SRC="Figures_Tables/Extended_Fig7a-Heatmap_DEGs_MAST_GlobalC3_acrossTime_noall_selMarkers_Dec_2023.png" width=800px>|  A heatmap of selected markers for each macrophage subtype derived from analysis of the mouse public data set on scRNASeq of atherosclerosis lesions in Ldlr−/− mice subjected to various durations of continuous high fat diet (HFD).Hierarchical clustering is shown based on log2FoldChange. |
 |Extended_Fig7b| [[PDF](Figures_Tables/Extended_Fig7b-Mouse_Mac_Proportion_HFDvsCtrl_Time_StackedBar_07112023_version1_update_29112023.pdf)] |<IMG SRC="Figures_Tables/Extended_Fig7b-Mouse_Mac_Proportion_HFDvsCtrl_Time_StackedBar_07112023_version1_update_29112023.png" width=800px>|  Barplot for three macrophage subtype proportions for each duration of continuous HFD. |
 |Extended_Fig10| [[PDF](Figures_Tables/Extended_Fig10-CVD_CasusalGenes_selPathway_cnetplot_112023_2.pdf)] |<IMG SRC="Figures_Tables/Extended_Fig10-CVD_CasusalGenes_selPathway_cnetplot_112023_2.png" width=800px>|  Gene ontology enrichment analysis of biological processes (BP) was conducted on 220 coronary artery disease causal genes prioritised in Aragam et al, 2022. A total of 178 out of 220 causal genes contributed to the GO enrichment analysis, and 867 enriched BP were idenAfied (see Supplementary Table 11). The most enriched pathways and their corresponding causal gene network are ploBed here using cnetplot function in R. Significant differentially expressed genes in our RNASeq data of aortic macrophages from iWD vs cWD (see Supplementary Table 1) are shown here (red: upregulated in iWD, blue: downregulated in iWD). NRP1 is represented in the most enriched biological pathways, which are related to cell migration, actin filament organisation, and vascular development|
