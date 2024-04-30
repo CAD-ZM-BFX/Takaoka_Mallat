@@ -343,7 +343,7 @@ message("+-----                    DEGs identification               --------+")
 
 colnames.comb <- colData(dds.macmer)$SampleName
 REScomb.file <- "./Figures_Tables/Macrophage/Mac_Mer_Result_res_merE_summary.csv"
-REScomb.sigfile <- "./Figures_Tables/Macrophage/Mac_Mer_Result_res_Sig_merE_summary.csv")
+REScomb.sigfile <- "./Figures_Tables/Macrophage/Mac_Mer_Result_res_Sig_merE_summary.csv"
 
 ## use result function 
 resmer       <- results(dds.macmer, contrast = c("Condition", "iWD", "cWD"))
@@ -1403,7 +1403,7 @@ cnetplot(eGO_CG, showCategory = categorys, color_category='firebrick', color_gen
 dev.off()
 
 
-## Finished after revised on 19/04/2024 ##
+##------------------ Finished after revised on 19/04/2024 -------------------##
 
 
 
