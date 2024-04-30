@@ -61,19 +61,13 @@ Supplementary Tables [[XLSX](Figures_Tables/Supplementary_Tables-Takaoka_etal-Na
 ## RNASeq Analysis <br>
 
 ### Step 1: Sample Information <br>
-
-  1.1) **R script**  SampleSheet_Generating-Step1.R [[R](Scripts/RNA_Seq/SampleSheet_Generating-01.R)] <br>
-  1.2) **Output** sample Tables with all available information
-
-      * **Macrophage**: <br>
+  1.1) **R script:**  SampleSheet_Generating-01.R [[R](Scripts/RNA_Seq/SampleSheet_Generating-01.R)] <br>
+  1.2) **Output:** sample Tables with all available information
+      * Macrophage: <br>
 
           a) First Batch: Macrophage_FirstBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_SampleTable.csv)] <br>
-
           b) Second Batch: Macrophage_SecondBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_SampleTable.csv)] <br>
-
-      * **Nrp1**:  <br>
-
-          Nrp1-nextflow_SampleTable.csv[[CSV](Data/Nrp1_SampleTable_cWD.csv)] <br>
+      * Nrp1: Nrp1-nextflow_SampleTable.csv[[CSV](Data/Nrp1_SampleTable_cWD.csv)] <br>
 
 
 ### Step 2: QC and Alignment pipeline
@@ -83,24 +77,17 @@ Supplementary Tables [[XLSX](Figures_Tables/Supplementary_Tables-Takaoka_etal-Na
 2.1) Input spreadsheet <br>
 
      a) Macrophage_FirstBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_Nextflow_SampleTable.csv)] <br>
-
      b) Macrophage_SecondBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_Nextflow_SampleTable.csv)] <br>
-
      c) Nrp1_Nextflow_SampleTable.csv[[CSV](Data/Nrp1_Nextflow_SampleTable_cWD.csv)] <br>
 
-2.2) Bash script: <br>
+2.2) Bash script: Macrophage_Nrp1_Nextflow_Run-02.sh [[bash](Scripts/RNA_Seq/Macrophage_Nrp1_Nextflow_Run-02.sh)] <br>
 
-    Macrophage_Nrp1_Nextflow_Run-02.sh [[bash](Scripts/RNA_Seq/Macrophage_Nrp1_Nextflow_Run-02.sh)] <br>
+2.3) Alignment summary: <br>
 
-2.3) **Alignment summary**: <br>
+     2.3.1) Macrophage: **Supplementary Table S21a** <br>
+     2.3.2) Nrp1 KO vs WT cWD: **Supplementary Table S21b** <br>
 
-       2.3.1) Macrophage: **Supplementary Table S21a** <br>
-
-       2.3.2) Nrp1 KO vs WT cWD: **Supplementary Table S21b** <br>
-
-2.4) Software and versions in Nextflow pipeline: <br>
-
-      **Supplementary Table S22**
+2.4) Software and versions in Nextflow pipeline:   **Supplementary Table S22**
 
 
 ### Step 3: RNASeq Analysis (R v4.2.1)
@@ -112,11 +99,11 @@ Analysis R scripts are given as below:
 
 #### Step 3.1: Differential Analysis
 
-* significant cut-off threshold is *padj < 0.05 & abs(log2FoldChange) >= 1*
+* significant cut-off threshold is (*padj < 0.05 & abs(log2FoldChange) >= 1*);
 * DESeq2 analysis for iWD vs cWD (merge two batches, significant DEGs
   **Supplementary Table S1** and **Fig2b**)
 * DESeq2 analysis (Nrp1 KO vs WT for cWD, significant DEGs
-  ()*padj < 0.05 & abs(log2FoldChange) >= 0.6*), **Supplementary Table S12**)
+  (*padj < 0.05 & abs(log2FoldChange) >= 0.6*), **Supplementary Table S12**)
 
 #### Step 3.2: Gene Ontology Analysis
 
@@ -152,8 +139,7 @@ macrophage subtypes, see **Supplementary Table S7** and **Figure 4b**.
 
  3.5.1) Fernandez(2019):Cohort 2 MC analyses on 23 patients stratified as *asymptomatic*
  (ASYM, n = 14) and *symptomatic* (SYM, n = 9). Volcano plot (**Fig 4c**) Highlight
- the DEGs which overlapped with (**Supplementary Table S7&8**) <br>
-
+ the DEGs which overlapped with (**Supplementary Table S7&8**)  <br>
     a) Macrophage sig DEGs (iWD vs cWD) <br>
     b) CVD relating GWAS genes <br>
     c) Integrating public mouse subtypes of Macrophge genes. <br>
@@ -190,7 +176,7 @@ The integrating and reclustering analysis are using the following script.
 from the **Alma Zernecke** et al (2022, Cardiovasular Research, https://doi.org/10.1093/cvr/cvac161)
 paper Supplementary material.
 
- Human_integrated_scRNASeq_Analysis.R[[Rscript](Scripts/SingleCell_public/Human_integrated_scRNASeq_Analysis.R)]
+ Human_integrated_scRNASeq_Analysis.R[[Rscript](Scripts/SingleCell_public/Human_scRNASeq_Analysis.R)]
 
     1) Including **Fig4e, 4f** <br>
     2) **Supplementary Table S9** <br>
@@ -210,8 +196,8 @@ paper Supplementary material.
 |Fig4e | [[PDF](Figures_Tables/Fig4e-scRNASeqHuman_integrated_selMac_dotplot_selMarkers_C3_18_12_2023.pdf)] |<IMG SRC="Figures_Tables/Fig4e-scRNASeqHuman_integrated_selMac_dotplot_selMarkers_C3_18_12_2023.png" width=800px>| Dotplot for selected markers of Human public atherosclerosis integrated scRNASeq data.|
 |Fig4f | [[PDF](Figures_Tables/Fig4f-Human_scRNASeq_Selcted_NRP1_highvslow_Barplot_N.pdf)] |<IMG SRC="Figures_Tables/Fig4f-Human_scRNASeq_Selcted_NRP1_highvslow_Barplot_N.pdf.png" width=800px>|  Selected Biological process Gene ontology pathways for human NRP1 high clusters vs NRP1 low clusters. |
 |Fig4h| [[PDF](Figures_Tables/Fig4h-Mouse_cWD_KOvsWT_Selcted_NRP1_highvslow_Barplot_N.pdf)] |<IMG SRC="Figures_Tables/Fig4h-Mouse_cWD_KOvsWT_Selcted_NRP1_highvslow_Barplot_N.pdf.png" width=800px>|  Selected Biological process Gene ontology pathways for mouse cWD NRP1 KOvsWT. |
-|Extended Fig4a | [[PDF](Figures_Tables/Extended_Fig4a-TFs_sig_Nsig_NES_difference_boxplot_01112023_new2_noviolet.pdf)] |<IMG SRC="Figures_Tables/Extended_Fig4a-TFs_sig_Nsig_NES_difference_boxplot_01112023_new2_noviolet.png" width=800px>| Transcription factor analysis for DEGs and nonDEGs Normalised enrichment score (NES) difference boxplot.|
-|Extended Fig4b | [[PDF](Figures_Tables/Extended_Fig4b-Spic_selectedPathway_Barplot_Dec_2022.pdf)] |<IMG SRC="Figures_Tables/Extended_Fig4b-Spic_selectedPathway_Barplot_Dec_2022.pdf.png" width=800px>| TF "Spic" relating DEGs selected Biological process enriched pathways bar plot.|
+|Extended Fig6a | [[PDF](Figures_Tables/Extended_Fig6a-TFs_sig_Nsig_NES_difference_boxplot_01112023_new2_noviolet.pdf)] |<IMG SRC="Figures_Tables/Extended_Fig6a-TFs_sig_Nsig_NES_difference_boxplot_01112023_new2_noviolet.png" width=800px>| Transcription factor analysis for DEGs and nonDEGs Normalised enrichment score (NES) difference boxplot.|
+|Extended Fig6b | [[PDF](Figures_Tables/Extended_Fig6b-Spic_selectedPathway_Barplot_Dec_2022.pdf)] |<IMG SRC="Figures_Tables/Extended_Fig6b-Spic_selectedPathway_Barplot_Dec_2022.pdf.png" width=800px>| TF "Spic" relating DEGs selected Biological process enriched pathways bar plot.|
 |Extended Fig7a | [[PDF](Figures_Tables/Extended_Fig7a-Heatmap_DEGs_MAST_GlobalC3_acrossTime_noall_selMarkers_Dec_2023.pdf)] |<IMG SRC="Figures_Tables/Extended_Fig7a-Heatmap_DEGs_MAST_GlobalC3_acrossTime_noall_selMarkers_Dec_2023.png" width=800px>|  A heatmap of selected markers for each macrophage subtype derived from analysis of the mouse public data set on scRNASeq of atherosclerosis lesions in Ldlr−/− mice subjected to various durations of continuous high fat diet (HFD).Hierarchical clustering is shown based on log2FoldChange. |
 |Extended_Fig7b| [[PDF](Figures_Tables/Extended_Fig7b-Mouse_Mac_Proportion_HFDvsCtrl_Time_StackedBar_07112023_version1_update_29112023.pdf)] |<IMG SRC="Figures_Tables/Extended_Fig7b-Mouse_Mac_Proportion_HFDvsCtrl_Time_StackedBar_07112023_version1_update_29112023.png" width=800px>|  Barplot for three macrophage subtype proportions for each duration of continuous HFD. |
 |Extended_Fig10| [[PDF](Figures_Tables/Extended_Fig10-CVD_CasusalGenes_selPathway_cnetplot_112023_2.pdf)] |<IMG SRC="Figures_Tables/Extended_Fig10-CVD_CasusalGenes_selPathway_cnetplot_112023_2.png" width=800px>|  Gene ontology enrichment analysis of biological processes (BP) was conducted on 220 coronary artery disease causal genes prioritised in Aragam et al, 2022. A total of 178 out of 220 causal genes contributed to the GO enrichment analysis, and 867 enriched BP were idenAfied (see Supplementary Table 11). The most enriched pathways and their corresponding causal gene network are ploBed here using cnetplot function in R. Significant differentially expressed genes in our RNASeq data of aortic macrophages from iWD vs cWD (see Supplementary Table 1) are shown here (red: upregulated in iWD, blue: downregulated in iWD). NRP1 is represented in the most enriched biological pathways, which are related to cell migration, actin filament organisation, and vascular development|
