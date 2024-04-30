@@ -54,7 +54,7 @@ Illumina NovaSeq6000 platform, paired-end reads (PE50)
 (**Supplementary Table S23**, Mouse; **Supplementary Table S26** Human).
 
 * Processed Data/Tables are given
-Supplementary Tables [[XLSX](Figures_Tables/Supplementary Tables-Takaoka et al-Nature 2023-03-04115-R2-Zhao.xlsx)]
+Supplementary Tables [[XLSX](Figures_Tables/Supplementary_Tables-Takaoka_etal-Nature_2023-03-04115-R2-Zhao.xlsx)]
 
 
 
