@@ -64,10 +64,16 @@ Supplementary Tables [[XLSX](Figures_Tables/Supplementary_Tables-Takaoka_etal-Na
 
   1.1) **R script**  SampleSheet_Generating-Step1.R [[R](Scripts/RNA_Seq/SampleSheet_Generating-01.R)] <br>
   1.2) **Output** sample Tables with all available information
+
       * **Macrophage**: <br>
-          I) First Batch: Macrophage_FirstBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_SampleTable.csv)] <br>
-          II) Second Batch: Macrophage_SecondBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_SampleTable.csv)] <br>
-      * **Nrp1**:  Nrp1-nextflow_SampleTable.csv[[CSV](Data/Nrp1_SampleTable_cWD.csv)] <br>
+
+          a) First Batch: Macrophage_FirstBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_SampleTable.csv)] <br>
+
+          b) Second Batch: Macrophage_SecondBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_SampleTable.csv)] <br>
+
+      * **Nrp1**:  <br>
+
+          Nrp1-nextflow_SampleTable.csv[[CSV](Data/Nrp1_SampleTable_cWD.csv)] <br>
 
 
 ### Step 2: QC and Alignment pipeline
@@ -76,9 +82,11 @@ Supplementary Tables [[XLSX](Figures_Tables/Supplementary_Tables-Takaoka_etal-Na
 
 2.1) Input spreadsheet <br>
 
-   a) Macrophage_FirstBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_Nextflow_SampleTable.csv)] <br>
-   b) Macrophage_SecondBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_Nextflow_SampleTable.csv)] <br>
-   c) Nrp1_Nextflow_SampleTable.csv[[CSV](Data/Nrp1_Nextflow_SampleTable_cWD.csv)] <br>
+     a) Macrophage_FirstBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_Nextflow_SampleTable.csv)] <br>
+
+     b) Macrophage_SecondBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_Nextflow_SampleTable.csv)] <br>
+
+     c) Nrp1_Nextflow_SampleTable.csv[[CSV](Data/Nrp1_Nextflow_SampleTable_cWD.csv)] <br>
 
 2.2) Bash script: <br>
 
@@ -86,12 +94,13 @@ Supplementary Tables [[XLSX](Figures_Tables/Supplementary_Tables-Takaoka_etal-Na
 
 2.3) **Alignment summary**: <br>
 
-      2.3.1) Macrophage: **Supplementary Table S21a** <br>
-      2.3.2) Nrp1 KO vs WT cWD: **Supplementary Table S21b** <br>
+       2.3.1) Macrophage: **Supplementary Table S21a** <br>
+
+       2.3.2) Nrp1 KO vs WT cWD: **Supplementary Table S21b** <br>
 
 2.4) Software and versions in Nextflow pipeline: <br>
 
-    **Supplementary Table S22**
+      **Supplementary Table S22**
 
 
 ### Step 3: RNASeq Analysis (R v4.2.1)
@@ -107,9 +116,9 @@ Analysis R scripts are given as below:
 * DESeq2 analysis for iWD vs cWD (merge two batches, significant DEGs
   **Supplementary Table S1** and **Fig2b**)
 * DESeq2 analysis (Nrp1 KO vs WT for cWD, significant DEGs
-  *padj < 0.05 & abs(log2FoldChange) >= 0.6*, **Supplementary Table S12**)
+  ()*padj < 0.05 & abs(log2FoldChange) >= 0.6*), **Supplementary Table S12**)
 
-### Step 3.2: Gene Ontology Analysis
+#### Step 3.2: Gene Ontology Analysis
 
 * Input data are the significant DEGs from DESeq analysis.
 * Using R package clusterProfiler (version 4.4.4), based on Biological Process mainly.
@@ -119,8 +128,8 @@ Analysis R scripts are given as below:
 
 #### Step 3.3: Transcription Factor (TF) binding motif enrichment analysis
 
-* Significant DEGs (padj <= 0.05 & abs(log2FoldChange) >= 1) and
-non-significant (padj > 0.1 & abs(log2FoldChange) < 1) TFs binding motif analysis
+* Significant DEGs (*padj <= 0.05 & abs(log2FoldChange) >= 1*) and
+non-significant (*padj > 0.1 & abs(log2FoldChange) < 1*) TFs binding motif analysis
 * R package Rcistarget (version 1.16.0) with motif rankings for  500 bp upstream
 of TSS and 100bp downstream was used in the analysis
 (mouse motif collection version 9, ‘mc9nr’, with 24453 motifs).
@@ -129,7 +138,7 @@ ranking motifs mean difference are plotted in **Extended Fig6a**.
 * Spic was selected and perform the Gene Ontology analysis for its relating sig DEGs.
 see **Supplementary Table S5** and **Extended Figure6b**.
 
-## Step 3.4: GWAS Analysis
+#### Step 3.4: GWAS Analysis
 * GWAS list relating to CVD (atherosclerosis) from EBI GWAS human, see
 **Supplementary Table S24** and also joint the table from
 supplementary table 13 of **Tcheandjieu et al.**.
@@ -139,7 +148,7 @@ supplementary table 13 of **Tcheandjieu et al.**.
 * GWAS data is also overlap with single cell integrating analysis of mouse for
 macrophage subtypes, see **Supplementary Table S7** and **Figure 4b**.
 
-## Step 3.5: Public RNASeq Analysis
+#### Step 3.5: Public RNASeq Analysis
 
  3.5.1) Fernandez(2019):Cohort 2 MC analyses on 23 patients stratified as *asymptomatic*
  (ASYM, n = 14) and *symptomatic* (SYM, n = 9). Volcano plot (**Fig 4c**) Highlight
