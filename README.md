@@ -180,24 +180,25 @@ macrophage subtypes. <br>
   * R package Seurat (version 5.0.0) was used to the scRNAseq analysis.
 
 ### Analysis R scripts
+* Mouse-scRNA analysis
 
   * Each individual mouse study analysis R scripts are used from **Alma Zernecke**
 et al (2022, Cardiovasular Research, https://doi.org/10.1093/cvr/cvac161)
 paper Supplementary material.
 
-  * The integrating and reclustering analysis are using the following script.
-
-  Mouse_integrated_scRNASeq_Analysis.R[[Rscript](Scripts/SingleCell_public/Mouse_scRNA_analysis.R)]
+  * The integrating analysis script is: Mouse_integrated_scRNASeq_Analysis.R[[Rscript](Scripts/SingleCell_public/Mouse_scRNA_analysis.R)]
 
     * Including **Fig4d** and **Extended Fig 7a,b** for time course DEGs analysis.
     * **Supplementary Table S3/10**
     * Additional Figure 1(a-c): Clustering and reclustering UMAP.
 
+* Human-scRNA Analysis
+
   *  Individual human study analysis R scripts are from either customised or the same
 from the **Alma Zernecke** et al (2022, Cardiovasular Research, https://doi.org/10.1093/cvr/cvac161)
 paper Supplementary material.
 
-   Human_integrated_scRNASeq_Analysis.R[[Rscript](Scripts/SingleCell_public/Human_scRNASeq_Analysis.R)]
+  * The integrating analysis script is: Human_integrated_scRNASeq_Analysis.R[[Rscript](Scripts/SingleCell_public/Human_scRNASeq_Analysis.R)]
 
     * Including **Fig4e, 4f**
     * **Supplementary Table S9**
