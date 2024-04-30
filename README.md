@@ -42,85 +42,90 @@ Hyperlipidaemia is a major risk factor of atherosclerotic cardiovascular disease
 
 ## Data Availability
 
-* RNASeq data for cWD and iWD: EMBL-EBI ArrayExpress <br>
-  **E-MTAB-12759**(https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-12759) <br>
-Illumina HiSeq 4000 platform, single-end reads (SE50), 2 Runs
+  * RNASeq data for cWD and iWD: EMBL-EBI ArrayExpress <br>
+    **E-MTAB-12759**(https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-12759) <br>
+  Illumina HiSeq 4000 platform, single-end reads (SE50), 2 Runs
 
-* RNASeq data for cWD Nrp1 KO: EMBL-EBI ArrayExpress <br>
-  **E-MTAB-12761**(https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-12761)<br>
-Illumina NovaSeq6000 platform, paired-end reads (PE50)
+  * RNASeq data for cWD Nrp1 KO: EMBL-EBI ArrayExpress <br>
+    **E-MTAB-12761**(https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-12761)<br>
+  Illumina NovaSeq6000 platform, paired-end reads (PE50)
 
-* single Cell RNASeq data: public data, please check the Supplementary Tables
-(**Supplementary Table S23**, Mouse; **Supplementary Table S26** Human).
+  * single Cell RNASeq data: public data, please check the Supplementary Tables
+  (**Supplementary Table S23**, Mouse; **Supplementary Table S26** Human).
 
-* Processed Data/Tables are given
-Supplementary Tables [[XLSX](Figures_Tables/Supplementary_Tables-Takaoka_etal-Nature_2023-03-04115-R2-Zhao.xlsx)]
+  * Processed Data/Tables are given
+  Supplementary Tables [[XLSX](Figures_Tables/Supplementary_Tables-Takaoka_etal-Nature_2023-03-04115-R2-Zhao.xlsx)]
 
 
 
 ## RNASeq Analysis <br>
 
-### Step 1: Sample Information <br>
-  1.1) **R script:**  SampleSheet_Generating-01.R [[R](Scripts/RNA_Seq/SampleSheet_Generating-01.R)] <br>
-  1.2) **Output:** sample Tables with all available information
+### Step 1: Sample Information
 
-      * Macrophage: <br>
-        a) First Batch: Macrophage_FirstBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_SampleTable.csv)] <br>
-        b) Second Batch: Macrophage_SecondBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_SampleTable.csv)] <br>
-      * Nrp1: Nrp1-nextflow_SampleTable.csv[[CSV](Data/Nrp1_SampleTable_cWD.csv)] <br>
+  * **R script:**  SampleSheet_Generating-01.R [[R](Scripts/RNA_Seq/SampleSheet_Generating-01.R)]
+
+  * **Output:** sample Tables with all available information
+
+    * Macrophage:
+
+      * First Batch: Macrophage_FirstBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_SampleTable.csv)]
+
+      * Second Batch: Macrophage_SecondBatch_nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_SampleTable.csv)]
+
+    * Nrp1: Nrp1-nextflow_SampleTable.csv[[CSV](Data/Nrp1_SampleTable_cWD.csv)]
 
 
 ### Step 2: QC and Alignment pipeline
 
                        (nextflow version 21.05.0, nf-core/rnaseq version 3.2)
 
-2.1) Input spreadsheet <br>
+  * Input spreadsheet
 
-  * Macrophage_FirstBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_Nextflow_SampleTable.csv)] <br>
+    * Macrophage_FirstBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_FirstBatch_Nextflow_SampleTable.csv)]
 
-  * Macrophage_SecondBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_Nextflow_SampleTable.csv)] <br>
+    * Macrophage_SecondBatch_Nextflow_SampleTable.csv[[CSV](Data/Macrophage_SecondBatch_Nextflow_SampleTable.csv)]
 
-  * Nrp1_Nextflow_SampleTable.csv[[CSV](Data/Nrp1_Nextflow_SampleTable_cWD.csv)] <br>
+    * Nrp1_Nextflow_SampleTable.csv[[CSV](Data/Nrp1_Nextflow_SampleTable_cWD.csv)]
 
-2.2) Bash script: Macrophage_Nrp1_Nextflow_Run-02.sh [[bash](Scripts/RNA_Seq/Macrophage_Nrp1_Nextflow_Run-02.sh)] <br>
+  * Bash script: Macrophage_Nrp1_Nextflow_Run-02.sh [[bash](Scripts/RNA_Seq/Macrophage_Nrp1_Nextflow_Run-02.sh)]
 
-2.3) Alignment summary: <br>
+  * Alignment summary:
 
-  * Macrophage: **Supplementary Table S21a** <br>
+    * Macrophage: **Supplementary Table S21a** <br>
 
-  * Nrp1 KO vs WT cWD: **Supplementary Table S21b** <br>
+    * Nrp1 KO vs WT cWD: **Supplementary Table S21b** <br>
 
-2.4) Software and versions in Nextflow pipeline:   **Supplementary Table S22**
+  * Software and versions in Nextflow pipeline:  **Supplementary Table S22**
 
 
 ### Step 3: RNASeq Analysis (R v4.2.1)
 
 Analysis R scripts are given as below:
 
- * Macrophage_DESeq_GO_Analysis-03.R[[R](Scripts/RNA_Seq/Macrophage_DESeq_GO_Analysis-03.R)] <br>
+ * Macrophage_DESeq_GO_Analysis-03.R[[R](Scripts/RNA_Seq/Macrophage_DESeq_GO_Analysis-03.R)]
 
- * Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-04.R[[R](Scripts/RNA_Seq/Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-04.R)] <br>
+ * Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-04.R[[R](Scripts/RNA_Seq/Nrp1_KOvsWT_cWD_DESeq_GO_Analysis-04.R)]
 
 #### Step 3.1: Differential Analysis
 
-* significant cut-off threshold is (*padj < 0.05 & abs(log2FoldChange) >= 1*);
+  * significant cut-off threshold is (*padj < 0.05 & abs(log2FoldChange) >= 1*);
 
-* DESeq2 analysis for iWD vs cWD (merge two batches, significant DEGs
-  **Supplementary Table S1** and **Fig2b**)
+  * DESeq2 analysis for iWD vs cWD (merge two batches, significant DEGs
+    **Supplementary Table S1** and **Fig2b**)
 
-* DESeq2 analysis (Nrp1 KO vs WT for cWD, significant DEGs
-  (*padj < 0.05 & abs(log2FoldChange) >= 0.6*), **Supplementary Table S12**)
+  * DESeq2 analysis (Nrp1 KO vs WT for cWD, significant DEGs
+    (*padj < 0.05 & abs(log2FoldChange) >= 0.6*), **Supplementary Table S12**)
 
 
 #### Step 3.2: Gene Ontology Analysis
 
-* Input data are the significant DEGs from DESeq analysis.
+  * Input data are the significant DEGs from DESeq analysis.
 
-* Using R package clusterProfiler (version 4.4.4), based on Biological Process mainly.
+  * Using R package clusterProfiler (version 4.4.4), based on Biological Process mainly.
 
-* GeneOntology results are given in **Supplementary Table S2** and **Figure 2a**.
+  * GeneOntology results are given in **Supplementary Table S2** and **Figure 2a**.
 
-* GeneOntology results for NRP1 KOvsWT are illustrated in both **Fig4h** and **Supplementary Table S13**.
+  * GeneOntology results for NRP1 KOvsWT are illustrated in both **Fig4h** and **Supplementary Table S13**.
 
 #### Step 3.3: Transcription Factor (TF) binding motif enrichment analysis
 
@@ -138,6 +143,7 @@ Analysis R scripts are given as below:
   see **Supplementary Table S5** and **Extended Figure6b**.
 
 #### Step 3.4: GWAS Analysis
+
   * GWAS list relating to CVD (atherosclerosis) from EBI GWAS human, see
   **Supplementary Table S24** and also joint the table from
   supplementary table 13 of **Tcheandjieu et al.**.
@@ -156,9 +162,9 @@ Analysis R scripts are given as below:
  (ASYM, n = 14) and *symptomatic* (SYM, n = 9). Volcano plot (**Fig 4c**) Highlight
  the DEGs which overlapped with (**Supplementary Table S7&8**)
 
-    * Macrophage sig DEGs (iWD vs cWD) <br>
-    * CVD relating GWAS genes <br>
-    * Integrating public mouse subtypes of Macrophge genes. <br>
+    * Macrophage sig DEGs (iWD vs cWD)
+    * CVD relating GWAS genes
+    * Integrating public mouse subtypes of Macrophge genes.
 
   * Krishna G. Aragam et al (2022) Supplementary Table 31: Causal CVD GWAS pathway
  Analysis, see **Extended Fig 9** with selected pathways and corresponding genes
@@ -177,23 +183,23 @@ macrophage subtypes. <br>
 
   * Each individual mouse study analysis R scripts are used from **Alma Zernecke**
 et al (2022, Cardiovasular Research, https://doi.org/10.1093/cvr/cvac161)
-paper Supplementary material. <br>
+paper Supplementary material.
 
   * The integrating and reclustering analysis are using the following script.
 
   Mouse_integrated_scRNASeq_Analysis.R[[Rscript](Scripts/SingleCell_public/Mouse_scRNA_analysis.R)]
 
-    * Including **Fig4d** and **Extended Fig 7a,b** for time course DEGs analysis. <br>
-    * **Supplementary Table S3/10** <br>
-    * Additional Figure 1(a-c): Clustering and reclustering UMAP. <br>
+    * Including **Fig4d** and **Extended Fig 7a,b** for time course DEGs analysis.
+    * **Supplementary Table S3/10**
+    * Additional Figure 1(a-c): Clustering and reclustering UMAP.
 
   *  Individual human study analysis R scripts are from either customised or the same
 from the **Alma Zernecke** et al (2022, Cardiovasular Research, https://doi.org/10.1093/cvr/cvac161)
 paper Supplementary material.
 
- Human_integrated_scRNASeq_Analysis.R[[Rscript](Scripts/SingleCell_public/Human_scRNASeq_Analysis.R)]
+   Human_integrated_scRNASeq_Analysis.R[[Rscript](Scripts/SingleCell_public/Human_scRNASeq_Analysis.R)]
 
-    * Including **Fig4e, 4f** 
+    * Including **Fig4e, 4f**
     * **Supplementary Table S9**
     * Additional Figure 2(a-c)
 
