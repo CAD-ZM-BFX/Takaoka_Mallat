@@ -45,13 +45,16 @@ Hyperlipidaemia is a major risk factor of atherosclerotic cardiovascular disease
 * RNASeq data for cWD and iWD: EMBL-EBI ArrayExpress <br>
   **E-MTAB-12759**(https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-12759) <br>
 Illumina HiSeq 4000 platform, single-end reads (SE50), 2 Runs
+
 * RNASeq data for cWD Nrp1 KO: EMBL-EBI ArrayExpress <br>
   **E-MTAB-12761**(https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-12761)<br>
 Illumina NovaSeq6000 platform, paired-end reads (PE50)
+
 * single Cell RNASeq data: public data, please check the Supplementary Tables
 (**Supplementary Tabble S23**, Mouse; **Supplementary Table S26** Human).
+
 * Processed Data/Tables are given
-Supplementary Tables [[XLSX](./Figures_Tables/SupplementaryTable-446096_1_data_set_4306588_Dec_2023.xlsx)]
+Supplementary Tables [[XLSX](./Figures_Tables/Supplementary Tables-Takaoka et al-Nature 2023-03-04115-R2-Zhao.xlsx)]
 ** Here needs to update the new version **
 
 
