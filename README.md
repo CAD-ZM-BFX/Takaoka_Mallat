@@ -9,7 +9,7 @@ Koskinen<sup>4,5,14,15</sup>, Mika Kähönen<sup>16,17,18</sup>, Tsuneyasu Kaish
 Habenicht<sup>11</sup>, Alain Tedgui<sup>7</sup>, Hafid Ait-Oufella<sup>7</sup>, Tian X Zhao<sup>1</sup>, Meritxell Nus<sup>1</sup>,
 Christiana Ruhrberg<sup>12</sup>, Soraya Taleb<sup>7</sup>, Jesse W. Williams<sup>8</sup>, Olli T. Raitakari<sup>4,5,20\*</sup>,
 Véronique Angeli<sup>2,3\*</sup>, Ziad Mallat<sup>1,7</sup>
-Journal xxx,  [![DOI](https://doi.org/***)](https://doi.org/***) <br>
+Nature,  [![DOI](https://doi.org/***)](https://doi.org/***) <br>
 
 <sup>1</sup> Department of Medicine, Cardiovascular Division, University of Cambridge, Heart and Lung Research Institute, CB2 0BB, Cambridge, UK, <br>
 <sup>2</sup> Immunology Translational Research Programme, Yong Loo Lin School of Medicine, Dept. of Department of Microbiology and Immunology, National University of Singapore, Singapore. <br>
@@ -35,7 +35,7 @@ Journal xxx,  [![DOI](https://doi.org/***)](https://doi.org/***) <br>
 \* Contributed equally <br>
 **Corresponding authors:** Ziad Mallat (zm255@medschl.cam.ac.uk)<br>
 
-Code Release for this github: [![DOI](https://zenodo.org/doi/10.5281/zenodo.13137366)](https://zenodo.org/doi/10.5281/zenodo.13137366)
+Code Release for this paper [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13137367.svg)](https://doi.org/10.5281/zenodo.13137367)
 
 ## Abstract
 Hyperlipidaemia is a major risk factor of atherosclerotic cardiovascular disease (ASCVD). Risk of incident cardiovascular events depends on cumulative lifetime exposure to low-density lipoprotein cholesterol (LDL-C) and, independently, on the time course of exposure to LDL-C, with early exposure being associated with a higher risk. Furthermore, LDL-C fluctuations are strongly associated with ASCVD outcomes. However, the precise mechanisms behind this increased ASCVD risk are not understood. Here, we make the unexpected observation that early intermittent feeding of mice with a high-cholesterol Western-type diet (WD) substantially accelerates atherosclerosis compared with late continuous exposure to WD, despite similar cumulative circulating LDL-C levels. We find that early intermittent hyperlipidaemia alters the number and homeostatic phenotype of resident-like arterial macrophages. Macrophage genes with altered expression are enriched for genes linked to human ASCVD in genome-wide association studies. We show that LYVE1+ resident macrophages are atheroprotective and identify new biological pathways, related to actin filament organisation, whose alteration in arterial macrophages accelerates atherosclerosis. Finally, using the Young Finns Study we show that exposure to cholesterol in childhood is significantly associated with the incidence and size of carotid atherosclerotic plaques in mid-adulthood. In summary, our results identify early intermittent exposure to cholesterol as a strong determinant of accelerated atherosclerosis, highlighting the importance of optimal control of hyperlipidaemia early in life, and providing insight into the underlying biological mechanisms. This knowledge will be essential to designing effective therapeutic strategies to combat atherosclerotic cardiovascular disease.
