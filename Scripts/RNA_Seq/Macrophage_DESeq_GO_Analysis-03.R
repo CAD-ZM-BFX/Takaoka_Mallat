@@ -839,17 +839,25 @@ pvalueHeat = Heatmap(padjDplt, col=pvalue_col_fun,cluster_rows =T, show_row_dend
                      ))
 grob.heat = grid.grabExpr(draw(pvalueHeat))
 
-pdf("./Figures_Tables/Macrophage/TFs/Extended-Fig6a-TFs_sig_Nsig_NES_difference_boxplot_01112023_new2.pdf", 
+pdf("./Figures_Tables/Macrophage/TFs/Extended-Fig6a-TFs_sig_Nsig_NES_difference_boxplot_01112023_new3.pdf", 
     onefile =T, height=8, width=6)
 boxplot_DFs <- ggplot(ss, aes(x = Difference, y = Group)) +
-  geom_boxplot(alpha=0.5) +
-  geom_vline(xintercept = 0,  color = "red", size=1.2) +
+  #geom_boxplot(alpha=0.5) +
+  geom_vline(xintercept = 0,  color = "darkmagenta", size=0.7, linetype = "longdash" ) +
   geom_hline(yintercept=c(1:27), linetype="dashed", color = "lightgrey", size=0.2) +
+  geom_point(shape = 19, size = 2.0, colour = "blue4") +
+  geom_point(data = ss %>% 
+               # Group the data by brand then get means
+               group_by(Group) %>% 
+               summarise(mean_nes = mean(Difference)), 
+             # Specify aesthetics
+             mapping = aes(y = Group, x = mean_nes), 
+             size = 6, color = 'red', shape = '|') +
   labs(x = '', y = '') +
-  theme(axis.text.x = element_text(angle = 0, hjust = 0.5, size=16, face= "bold"),
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5, size=16),# face= "bold"),
         axis.title.x = element_text(size=12, face= "bold"),
         axis.title.y = element_text(size=12, face= "bold"),
-        axis.text.y = element_text(size=16, face="bold.italic"),
+        axis.text.y = element_text(size=16, face="italic"), #face="bold.italic"),
         legend.position="right") +
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
@@ -859,7 +867,12 @@ plot_grid(boxplot_DFs, grob.heat, rel_widths=c(1.2,1))
 
 dev.off()
 
-## d) TF specific "Spic" pathway analysis, relating to Fig2g, here used the sigDEs Spic TFs relating genes
+
+boxplt_Diff_Stats <- tapply(ss$Difference, ss$Group, summary)
+boxplt_Diffpadj_Stats <- tapply(ss$TFs.adjp, ss$Group, summary)
+
+## d) TF specific "Spic" pathway analysis, relating to Fig2g, here used the
+## sigDEs Spic TFs relating genes
 
 ## no KEGG enrichment pathways identified. 
 Spic_genes <- TFscommon[grep("Spic",TFscommon$TF_highConf),]
@@ -890,11 +903,11 @@ SpicgoBar <- barplot(Spic_GO, showCategory=c("ribonucleoprotein complex biogenes
                                              "actin filament organization")) 
 
 NewBar <- SpicgoBar + scale_fill_continuous() + 
-  theme(axis.text.x = element_text(angle = 0, hjust = 0.5, size=12, face= "bold"),
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5, size=14),# face= "bold"),
         axis.title.x = element_text(size=12, face= "bold"),
         axis.title.y = element_text(size=12, face= "bold"),
-        axis.text.y = element_text(size=12, face="bold.italic"),
-        legend.title = element_text(size = 10, face="bold")) +
+        axis.text.y = element_text(size=14), #face="bold.italic"),
+        legend.title = element_text(size = 12, face="bold")) +
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"),
         panel.background = element_rect(fill = "white", colour = NA)) 
@@ -902,7 +915,7 @@ NewBar <- SpicgoBar + scale_fill_continuous() +
 
 
 pdf("./Figures_Tables/Macrophage/GoPathway/Extended-Fig6b-Spic_selectedPathway_Barplot_Dec_2022.pdf",
-    width=5, height=4, onefile=T)
+    width=6, height=4, onefile=T)
 NewBar
 dev.off()
 
